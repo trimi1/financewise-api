@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "UE25_26_ROLE")
 public class Role {
 
     @Id
@@ -16,4 +17,19 @@ public class Role {
 
     @OneToMany(mappedBy = "role")
     private List<Utilisateur> utilisateurs;
+
+    protected Role() {
+    }
+
+    public Role(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return this.role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

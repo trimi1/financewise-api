@@ -1,4 +1,4 @@
-package be.helmo.infrastrucures.model;
+package be.helmo.infrastructures.model;
 
 import jakarta.persistence.*;
 
@@ -43,5 +43,13 @@ public class Information {
 
     public void setLien(String lien) {
         this.lien = lien;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 }

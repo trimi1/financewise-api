@@ -1,4 +1,4 @@
-package be.helmo.infrastrucures.model;
+package be.helmo.infrastructures.model;
 
 import jakarta.persistence.*;
 
@@ -43,7 +43,7 @@ public class Objectif {
     }
 
     public String getNom() {
-        return this.nom;
+        return nom;
     }
 
     public void setNom(String nom) {
@@ -51,10 +51,42 @@ public class Objectif {
     }
 
     public double getMontant() {
-        return this.montant;
+        return montant;
     }
 
     public void setMontant(double montant) {
         this.montant = montant;
+    }
+
+    public LocalDateTime getDateLimite() {
+        return dateLimite;
+    }
+
+    public void setDateLimite(LocalDateTime dateLimite) {
+        this.dateLimite = dateLimite;
+    }
+
+    public Devise getDevise() {
+        return devise;
+    }
+
+    public void setDevise(Devise devise) {
+        this.devise = devise;
+    }
+
+    public String getRecommandation() {
+        return recommandation;
+    }
+
+    public void setRecommandation(String recommandation) {
+        this.recommandation = recommandation;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 }

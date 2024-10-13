@@ -1,6 +1,8 @@
-package be.helmo.infrastrucures.model;
+package be.helmo.infrastructures.model;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "UE25_26_UTILISATEUR")
@@ -28,6 +30,24 @@ public class Utilisateur {
     @ManyToOne
     @JoinColumn(name = "idRole", nullable = false, referencedColumnName = "idRole")
     private Role role;
+
+    @OneToMany(mappedBy = "utilisateur")
+    List<Depense> depenses;
+
+    @OneToMany(mappedBy = "utilisateur")
+    List<Objectif> objectifs;
+
+    @OneToMany(mappedBy = "utilisateur")
+    List<Categorie> categories;
+
+    @OneToMany(mappedBy = "utilisateur")
+    List<Information> informations;
+
+    @OneToMany(mappedBy = "utilisateur")
+    List<QuizzEssaie> quizzEssaies;
+
+    @OneToMany(mappedBy = "utilisateur")
+    List<HasAmis> amis;
 
     protected Utilisateur() {
     }
@@ -64,9 +84,4 @@ public class Utilisateur {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
-
-
-
 }

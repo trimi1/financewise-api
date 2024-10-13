@@ -1,4 +1,4 @@
-package be.helmo.infrastrucures.model;
+package be.helmo.infrastructures.model;
 
 import jakarta.persistence.*;
 

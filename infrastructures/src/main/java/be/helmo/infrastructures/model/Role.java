@@ -1,4 +1,4 @@
-package be.helmo.infrastrucures.model;
+package be.helmo.infrastructures.model;
 
 import jakarta.persistence.*;
 
@@ -27,9 +27,5 @@ public class Role {
 
     public String getRole() {
         return this.role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }

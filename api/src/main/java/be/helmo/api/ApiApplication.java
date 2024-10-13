@@ -7,11 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EntityScan(basePackages = "be.helmo.infrastructures.model")
-@ComponentScan(basePackages = "be.helmo.infrastructures.repository")
+@ComponentScan(basePackages = {"be.helmo.api", "be.helmo.infrastructures"})
 public class ApiApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);
-
     }
 }

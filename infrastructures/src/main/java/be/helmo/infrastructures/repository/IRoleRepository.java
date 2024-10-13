@@ -1,9 +1,19 @@
 package be.helmo.infrastructures.repository;
 
 import be.helmo.infrastructures.model.Role;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.Optional;
 
 @Repository
-public interface IRoleRepository extends CrudRepository<Role, Integer> {
+public interface IRoleRepository extends JpaRepository<Role, Integer> {
+    Optional<Role> findByRole(String role);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DBCC CHECKIDENT ('ue25_26_role', RESEED, 0)", nativeQuery = true)
+    void resetRoleIdCounter();
 }

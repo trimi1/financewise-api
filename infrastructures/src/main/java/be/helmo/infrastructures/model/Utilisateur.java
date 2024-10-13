@@ -84,4 +84,52 @@ public class Utilisateur {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public List<Depense> getDepenses() {
+        return this.depenses;
+    }
+
+    public void setDepenses(List<Depense> depenses) {
+        this.depenses = depenses;
+    }
+
+    public List<Objectif> getObjectifs() {
+        return objectifs;
+    }
+
+    public void setObjectifs(List<Objectif> objectifs) {
+        this.objectifs = objectifs;
+    }
+
+    public List<Categorie> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Categorie> categories) {
+        this.categories = categories;
+    }
+
+    public List<Information> getInformations() {
+        return informations;
+    }
+
+    public void setInformations(List<Information> informations) {
+        this.informations = informations;
+    }
+
+    public List<QuizzEssaie> getQuizzEssaies() {
+        return quizzEssaies;
+    }
+
+    public void setQuizzEssaies(List<QuizzEssaie> quizzEssaies) {
+        this.quizzEssaies = quizzEssaies;
+    }
+
+    public List<HasAmis> getAmis() {
+        return amis;
+    }
+
+    public void setAmis(List<HasAmis> amis) {
+        this.amis = amis;
+    }
 }

@@ -19,27 +19,7 @@ public class IRoleRepositoryTests {
     private IRoleRepository roleRepository;
 
     @Test
-    public void testFindById() {
-        // Given
-        Role role = new Role("Admin");
-        roleRepository.save(role);
-
-        // When
-        Optional<Role> foundRole = roleRepository.findById(1);
-
-        // Then
-        assertTrue(foundRole.isPresent());
-        // When
-        roleRepository.delete(foundRole.get());
-
-        // Then
-        Optional<Role> optionalRole = roleRepository.findById(1);
-        assertTrue(optionalRole.isEmpty());
-        roleRepository.resetRoleIdCounter();
-    }
-
-    @Test
-    public void Should_delete_role() {
+    public void Should_save_and_delete_role() {
         // Given
         Role role = new Role("Admin");
         roleRepository.save(role);

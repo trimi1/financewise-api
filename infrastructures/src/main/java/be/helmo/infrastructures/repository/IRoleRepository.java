@@ -17,5 +17,5 @@ public interface IRoleRepository extends JpaRepository<Role, Integer> {
     @Modifying
     @Transactional
     @Query(value = "DBCC CHECKIDENT ('ue25_26_role', RESEED, 0)", nativeQuery = true)
-    void resetRoleIdCounter();
+    void resetAutoIncrement();
 }

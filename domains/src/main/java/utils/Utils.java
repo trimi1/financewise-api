@@ -13,15 +13,11 @@ public class Utils {
         String groupCode = "";
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         String numbers = "0123456789";
+        String alphanumeric = alphabet + numbers;
 
         for (int i = 0; i < 6; i++) {
-            if (i < 3){
-                int index = (int) (alphabet.length() * random.nextDouble());
-                groupCode += alphabet.charAt(index);
-            } else {
-                int index = (int) (numbers.length() * random.nextDouble());
-                groupCode += numbers.charAt(index);
-            }
+            int index = (int) (alphanumeric.length() * random.nextDouble());
+            groupCode += alphanumeric.charAt(index);
         }
 
         if (!groupsCodes.contains(groupCode)) {

@@ -10,7 +10,7 @@ import static org.mockito.Mockito.*;
 
 public class UtilsTests {
     @Test
-    public void testGenerateGroupCode() {
+    public void shouldGenerateCorrectGroupCode() {
         Random random = Mockito.mock(Random.class);
         Utils utils = new Utils(random);
 
@@ -25,5 +25,17 @@ public class UtilsTests {
 
         System.out.println(groupCode);
         assert groupCode.equals("AFK345");
+    }
+
+    @Test
+    public void DisplayGenerateGroupCode() {
+        Random random = new Random();
+        Utils utils = new Utils(random);
+
+        List<String> groupsCodes = List.of("ABC123", "DEF456", "GHI789");
+        String groupCode = utils.generateCode(groupsCodes);
+
+        // IT ONLY DISPLAYS THE GENERATED GROUP CODE ( It's not a real test )
+        System.out.println(groupCode);
     }
 }

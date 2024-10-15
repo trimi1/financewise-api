@@ -27,6 +27,6 @@ public class IRoleRepositoryTests {
         assertTrue(foundedRole.isPresent());
         assertEquals("Admin", foundedRole.get().getRole());
         roleRepository.delete(foundedRole.get());
-        roleRepository.resetRoleIdCounter();
+        roleRepository.resetAutoIncrement();
     }
 }

@@ -85,6 +85,10 @@ public class Utilisateur {
         this.email = email;
     }
 
+    public String getMotDePasse() {return this.motDePasse;}
+    public String getCode() {return this.code;}
+    public Role getRole() { return this.role;}
+
     public List<Depense> getDepenses() {
         return this.depenses;
     }

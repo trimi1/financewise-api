@@ -7,8 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public interface ICategorieRepository extends JpaRepository<Categorie, Integer> {
+
+    Optional<Categorie> findByCategorie(String categorie);
 
     @Modifying
     @Transactional

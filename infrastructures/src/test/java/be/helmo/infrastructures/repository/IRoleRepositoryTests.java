@@ -19,7 +19,7 @@ public class IRoleRepositoryTests {
     private IRoleRepository roleRepository;
 
     @Test
-    public void Should_save_and_delete_role() {
+    public void should_save_and_delete_role() {
         // Given
         Role role = new Role("Admin");
         roleRepository.save(role);

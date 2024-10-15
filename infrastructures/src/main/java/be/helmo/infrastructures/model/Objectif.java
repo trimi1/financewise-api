@@ -34,12 +34,13 @@ public class Objectif {
     protected Objectif() {
     }
 
-    public Objectif(String nom, double montant, LocalDateTime dateLimite, Devise devise, String recommandation) {
+    public Objectif(String nom, double montant, LocalDateTime dateLimite, Devise devise, String recommandation, Utilisateur utilisateur) {
         this.nom = nom;
         this.montant = montant;
         this.dateLimite = dateLimite;
         this.devise = devise;
         this.recommandation = recommandation;
+        this.utilisateur = utilisateur;
     }
 
     public String getNom() {

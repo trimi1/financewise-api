@@ -4,5 +4,5 @@ plugins {
 }
 
 rootProject.name = 'financeWiseServer'
-include('domains' , 'infrastructures', 'api')
+include('api')
 

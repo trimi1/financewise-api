@@ -8,6 +8,7 @@ import be.helmo.api.infrastructure.model.Utilisateur;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
+@ActiveProfiles("test")
 public class IQuizzEssaieRepositoryTests {
     @Autowired
     private IQuizzEssaieRepository repository;
@@ -43,17 +45,5 @@ public class IQuizzEssaieRepositoryTests {
         assertEquals("Finance #1", founded.get().getQuizz().getTitre());
         assertEquals("Manca", founded.get().getUtilisateur().getNom());
         assertEquals(42, founded.get().getScore());
-
-        repository.delete(founded.get());
-        repository.resetAutoIncrement();
-
-        quizzRepository.delete(founded.get().getQuizz());
-        quizzRepository.resetAutoIncrement();
-
-        utilisateurRepository.delete(utilisateur);
-        utilisateurRepository.resetAutoIncrement();
-
-        roleRepository.delete(role);
-        roleRepository.resetAutoIncrement();
     }
 }

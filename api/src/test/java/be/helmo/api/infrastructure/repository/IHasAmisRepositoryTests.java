@@ -8,6 +8,7 @@ import be.helmo.api.infrastructure.model.Utilisateur;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
+@ActiveProfiles("test")
 public class IHasAmisRepositoryTests {
     @Autowired
     IHasAmisRepository hasAmisRepository;
@@ -45,18 +47,5 @@ public class IHasAmisRepositoryTests {
         assertEquals("m.manca@student.helmo.be", foundedHasAmis.get().getUtilisateur().getEmail());
         assertEquals("m.maghe@student.helmo.be", foundedHasAmis.get().getAmis().getEmail());
         assertEquals("Voir", foundedHasAmis.get().getPermission().getPermission());
-
-        hasAmisRepository.delete(foundedHasAmis.get());
-        hasAmisRepository.resetAutoIncrement();
-
-        permissionRepository.delete(foundedHasAmis.get().getPermission());
-        permissionRepository.resetAutoIncrement();
-
-        utilisateurRepository.delete(foundedHasAmis.get().getUtilisateur());
-        utilisateurRepository.delete(foundedHasAmis.get().getAmis());
-        utilisateurRepository.resetAutoIncrement();
-
-        roleRepository.delete(role);
-        roleRepository.resetAutoIncrement();
     }
 }

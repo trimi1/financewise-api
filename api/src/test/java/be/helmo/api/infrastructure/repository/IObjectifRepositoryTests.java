@@ -5,6 +5,7 @@ import be.helmo.api.infrastructure.model.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
+@ActiveProfiles("test")
 public class IObjectifRepositoryTests {
     @Autowired
     private IObjectifRepository objectifRepository;
@@ -48,17 +50,5 @@ public class IObjectifRepositoryTests {
         assertEquals("Euro", founded.get().getDevise().getDevise());
         assertEquals("Met 1 euro dans un pot tous les jours.", founded.get().getRecommandation());
         assertEquals("Mirko", founded.get().getUtilisateur().getPrenom());
-
-        objectifRepository.delete(founded.get());
-        objectifRepository.resetAutoIncrement();
-
-        deviseRepository.delete(founded.get().getDevise());
-        deviseRepository.resetAutoIncrement();
-
-        utilisateurRepository.delete(founded.get().getUtilisateur());
-        utilisateurRepository.resetAutoIncrement();
-
-        roleRepository.delete(founded.get().getUtilisateur().getRole());
-        roleRepository.resetAutoIncrement();
     }
 }

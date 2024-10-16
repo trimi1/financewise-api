@@ -6,6 +6,7 @@ import be.helmo.api.infrastructure.model.RessourceQuizz;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
+@ActiveProfiles("test")
 public class IRessourceQuizzRepositoryTests {
     @Autowired
     IRessourceQuizzRepository repository;
@@ -33,11 +35,5 @@ public class IRessourceQuizzRepositoryTests {
         assertEquals("A, B ou C ?", founded.get().getQuestion());
         assertEquals("A", founded.get().getReponse());
         assertEquals("Finance #1", founded.get().getQuizz().getTitre());
-
-        repository.delete(ressourceQuizz);
-        repository.resetAutoIncrement();
-
-        quizzRepository.delete(quizz);
-        quizzRepository.resetAutoIncrement();
     }
 }

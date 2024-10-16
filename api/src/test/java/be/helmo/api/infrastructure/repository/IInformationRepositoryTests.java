@@ -7,6 +7,7 @@ import be.helmo.api.infrastructure.model.Utilisateur;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
+@ActiveProfiles("test")
 public class IInformationRepositoryTests {
     @Autowired
     private IInformationRepository repository;
@@ -38,14 +40,5 @@ public class IInformationRepositoryTests {
         assertEquals("Tuto", founded.get().getTitre());
         assertEquals("www.youtube.com", founded.get().getLien());
         assertEquals("Mirko", founded.get().getUtilisateur().getPrenom());
-
-        repository.delete(founded.get());
-        repository.resetAutoIncrement();
-
-        utilisateurRepository.save(utilisateur);
-        utilisateurRepository.resetAutoIncrement();
-
-        roleRepository.save(role);
-        roleRepository.resetAutoIncrement();
     }
 }

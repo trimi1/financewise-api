@@ -5,6 +5,7 @@ import be.helmo.api.infrastructure.model.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
+@ActiveProfiles("test")
 public class IDepenseRepositoryTests {
     @Autowired
     IDepenseRepository depenseRepository;
@@ -58,23 +60,5 @@ public class IDepenseRepositoryTests {
         assertEquals("Voiture", foundedDepense.get().getCategorie().getCategorie());
         assertEquals("Ferrari", foundedDepense.get().getObjectif().getNom());
         assertEquals("m.manca@student.helmo.be", foundedDepense.get().getUtilisateur().getEmail());
-
-        depenseRepository.delete(foundedDepense.get());
-        depenseRepository.resetAutoIncrement();
-
-        categorieRepository.delete(foundedDepense.get().getCategorie());
-        categorieRepository.resetAutoIncrement();
-
-        objectifRepository.delete(foundedDepense.get().getObjectif());
-        objectifRepository.resetAutoIncrement();
-
-        deviseRepository.delete(foundedDepense.get().getDevise());
-        deviseRepository.resetAutoIncrement();
-
-        utilisateurRepository.delete(foundedDepense.get().getUtilisateur());
-        utilisateurRepository.resetAutoIncrement();
-
-        roleRepository.delete(foundedDepense.get().getUtilisateur().getRole());
-        roleRepository.resetAutoIncrement();
     }
 }

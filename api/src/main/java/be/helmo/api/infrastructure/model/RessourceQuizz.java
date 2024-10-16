@@ -36,4 +36,8 @@ public class RessourceQuizz {
     public String getReponse() {
         return reponse;
     }
+
+    public Quizz getQuizz() {
+        return quizz;
+    }
 }

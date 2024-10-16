@@ -21,4 +21,25 @@ public class QuizzEssaie {
     @Column(nullable = false)
     private int score;
 
+    protected QuizzEssaie() {
+    }
+
+    public QuizzEssaie(Quizz quizz, Utilisateur utilisateur, int score) {
+        this.quizz = quizz;
+        this.utilisateur = utilisateur;
+        this.score = score;
+    }
+
+    public Quizz getQuizz() {
+        return quizz;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
 }

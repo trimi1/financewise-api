@@ -1,9 +1,7 @@
 package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
-
-import be.helmo.api.infrastructure.model.Categorie;
-import be.helmo.api.infrastructure.model.Devise;
+import be.helmo.api.infrastructure.model.Information;
 import be.helmo.api.infrastructure.model.Role;
 import be.helmo.api.infrastructure.model.Utilisateur;
 import org.junit.jupiter.api.Test;
@@ -16,45 +14,38 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
-public class ICategorieRepositoryTests {
+public class IInformationRepositoryTests {
     @Autowired
-    private ICategorieRepository repository;
-    @Autowired
-    private IDeviseRepository deviseRepository;
+    private IInformationRepository repository;
     @Autowired
     private IUtilisateurRepository utilisateurRepository;
     @Autowired
     private IRoleRepository roleRepository;
 
     @Test
-    public void should_save_categorie() {
-        Devise devise = new Devise("Euro");
+    public void should_insert_information() {
         Role role = new Role("Admin");
         Utilisateur utilisateur = new Utilisateur("Manca", "Mirko", "m.manca@student.helmo.be", "P4$$word", "m4loje", role);
-        Categorie categorie = new Categorie("Voiture", 2000, devise, utilisateur);
+        Information information = new Information("Tuto", "www.youtube.com", utilisateur);
 
-        deviseRepository.save(devise);
         roleRepository.save(role);
         utilisateurRepository.save(utilisateur);
-        repository.save(categorie);
+        repository.save(information);
 
-        Optional<Categorie> founded = repository.findByCategorie("Voiture");
+        Optional<Information> founded = repository.findByTitre("Tuto");
         assertTrue(founded.isPresent());
 
-        assertEquals("Euro", founded.get().getDevise().getDevise());
-        assertEquals("Manca", founded.get().getUtilisateur().getNom());
-        assertEquals("Voiture", founded.get().getCategorie());
+        assertEquals("Tuto", founded.get().getTitre());
+        assertEquals("www.youtube.com", founded.get().getLien());
+        assertEquals("Mirko", founded.get().getUtilisateur().getPrenom());
 
-        repository.delete(categorie);
+        repository.delete(founded.get());
         repository.resetAutoIncrement();
 
-        utilisateurRepository.delete(utilisateur);
+        utilisateurRepository.save(utilisateur);
         utilisateurRepository.resetAutoIncrement();
 
-        roleRepository.delete(role);
+        roleRepository.save(role);
         roleRepository.resetAutoIncrement();
-
-        deviseRepository.delete(devise);
-        deviseRepository.resetAutoIncrement();
     }
 }

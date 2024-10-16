@@ -7,8 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public interface IInformationRepository extends JpaRepository<Information, Integer> {
+
+    Optional<Information> findByTitre(String titre);
 
     @Modifying
     @Transactional

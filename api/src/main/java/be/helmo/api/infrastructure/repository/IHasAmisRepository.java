@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface IHasAmis extends JpaRepository<HasAmis, Integer> {
+public interface IHasAmisRepository extends JpaRepository<HasAmis, Integer> {
 
     @Modifying
     @Transactional

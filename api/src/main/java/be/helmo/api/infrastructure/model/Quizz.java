@@ -25,5 +25,7 @@ public class Quizz {
         this.titre = titre;
     }
 
-
+    public String getTitre() {
+        return titre;
+    }
 }

@@ -7,11 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public interface IPermissionRepository extends JpaRepository<Permission, Integer> {
+
+    Optional<Permission> findByPermission(String voir);
 
     @Modifying
     @Transactional
     @Query(value = "DBCC CHECKIDENT ('ue25_26_permission', RESEED, 0)", nativeQuery = true)
     void resetAutoIncrement();
+
 }

@@ -31,6 +31,8 @@ public class HasAmis {
         this.permission = permission;
     }
 
+    public Utilisateur getUtilisateur() {return utilisateur;}
+
     public Utilisateur getAmis() {
         return this.amis;
     }

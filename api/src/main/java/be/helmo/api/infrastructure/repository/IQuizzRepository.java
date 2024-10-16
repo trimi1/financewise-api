@@ -7,11 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public interface IQuizzRepository extends JpaRepository<Quizz, Integer> {
+
+    Optional<Quizz> findByTitre(String titre);
 
     @Modifying
     @Transactional
     @Query(value = "DBCC CHECKIDENT ('ue25_26_quizz', RESEED, 0)", nativeQuery = true)
     void resetAutoIncrement();
+
 }

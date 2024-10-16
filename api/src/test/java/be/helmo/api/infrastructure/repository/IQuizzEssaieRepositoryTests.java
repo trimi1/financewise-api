@@ -1,9 +1,8 @@
 package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
-
-import be.helmo.api.infrastructure.model.Categorie;
-import be.helmo.api.infrastructure.model.Devise;
+import be.helmo.api.infrastructure.model.Quizz;
+import be.helmo.api.infrastructure.model.QuizzEssaie;
 import be.helmo.api.infrastructure.model.Role;
 import be.helmo.api.infrastructure.model.Utilisateur;
 import org.junit.jupiter.api.Test;
@@ -16,45 +15,45 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
-public class ICategorieRepositoryTests {
+public class IQuizzEssaieRepositoryTests {
     @Autowired
-    private ICategorieRepository repository;
+    private IQuizzEssaieRepository repository;
     @Autowired
-    private IDeviseRepository deviseRepository;
+    private IQuizzRepository quizzRepository;
     @Autowired
     private IUtilisateurRepository utilisateurRepository;
     @Autowired
     private IRoleRepository roleRepository;
 
     @Test
-    public void should_save_categorie() {
-        Devise devise = new Devise("Euro");
+    public void should_insert_quizzessaie() {
         Role role = new Role("Admin");
         Utilisateur utilisateur = new Utilisateur("Manca", "Mirko", "m.manca@student.helmo.be", "P4$$word", "m4loje", role);
-        Categorie categorie = new Categorie("Voiture", 2000, devise, utilisateur);
+        Quizz quizz = new Quizz("Finance #1");
+        QuizzEssaie quizzEssaie = new QuizzEssaie(quizz, utilisateur, 42);
 
-        deviseRepository.save(devise);
         roleRepository.save(role);
         utilisateurRepository.save(utilisateur);
-        repository.save(categorie);
+        quizzRepository.save(quizz);
+        repository.save(quizzEssaie);
 
-        Optional<Categorie> founded = repository.findByCategorie("Voiture");
+        Optional<QuizzEssaie> founded = repository.findById(1);
         assertTrue(founded.isPresent());
 
-        assertEquals("Euro", founded.get().getDevise().getDevise());
+        assertEquals("Finance #1", founded.get().getQuizz().getTitre());
         assertEquals("Manca", founded.get().getUtilisateur().getNom());
-        assertEquals("Voiture", founded.get().getCategorie());
+        assertEquals(42, founded.get().getScore());
 
-        repository.delete(categorie);
+        repository.delete(founded.get());
         repository.resetAutoIncrement();
+
+        quizzRepository.delete(founded.get().getQuizz());
+        quizzRepository.resetAutoIncrement();
 
         utilisateurRepository.delete(utilisateur);
         utilisateurRepository.resetAutoIncrement();
 
         roleRepository.delete(role);
         roleRepository.resetAutoIncrement();
-
-        deviseRepository.delete(devise);
-        deviseRepository.resetAutoIncrement();
     }
 }

@@ -35,22 +35,30 @@ public class UserService {
 
     public void addUser(Utilisateur user) {
         //TODO : Rajouter le cheking ou voir pour supprimer (Méthode idempotente ?)
-        repository.save(user);
+        checkRole(user.getRole().getRole());
+        addPerson(user);
     }
 
     public void updateUser(Integer id, Utilisateur user) {
+        checkRole(user.getRole().getRole());
         Optional<Utilisateur> userOptional = repository.findById(id);
         if (userOptional.isPresent()) {
             repository.save(user);
         } else {
-            List<String> codes = repository.findAllCodes();
-            Optional<Role> role = roleRepository.findByRole("User");
-            if(role.isEmpty()) {
-                roleRepository.save(new Role("User"));
-            }
-
-            role = roleRepository.findByRole("User");
-            role.ifPresent(value -> repository.save(new Utilisateur(user.getNom(), user.getPrenom(), user.getEmail(), user.getMotDePasse(), this.utils.generateCode(codes), value)));
+            addPerson(user);
         }
+    }
+
+    private void checkRole(String role) {
+        Optional<Role> roleOptional = roleRepository.findByRole(role);
+        if(roleOptional.isEmpty()) {
+            roleRepository.save(new Role(role));
+        }
+    }
+
+    private void addPerson(Utilisateur user) {
+        List<String> codes = repository.findAllCodes();
+        Optional<Role> role = roleRepository.findByRole("User");
+        role.ifPresent(value -> repository.save(new Utilisateur(user.getNom(), user.getPrenom(), user.getEmail(), user.getMotDePasse(), this.utils.generateCode(codes), value)));
     }
 }

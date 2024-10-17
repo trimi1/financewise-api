@@ -2,10 +2,12 @@ package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.Permission;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,15 +20,18 @@ public class IPermissionRepositoryTests {
     @Autowired
     IPermissionRepository repository;
 
+
     @Test
+    @Transactional
     public void should_insert_permission() {
-        Permission permission = new Permission("Voir", "Voir les dépenses");
+        Permission permission = new Permission("Modifier", "Modifier les dépenses");
 
         repository.save(permission);
-        Optional<Permission> founded = repository.findByPermission("Voir");
+        Optional<Permission> founded = repository.findByPermission("Modifier");
         assertTrue(founded.isPresent());
 
-        assertEquals("Voir", founded.get().getPermission());
-        assertEquals("Voir les dépenses", founded.get().getDescription());
+        assertEquals("Modifier", founded.get().getPermission());
+        assertEquals("Modifier les dépenses", founded.get().getDescription());
     }
+
 }

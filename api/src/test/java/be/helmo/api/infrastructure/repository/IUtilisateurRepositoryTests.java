@@ -2,10 +2,12 @@ package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -21,21 +23,23 @@ public class IUtilisateurRepositoryTests {
     private IRoleRepository roleRepository;
 
     @Test
+    @Transactional
     public void should_save_utilisateur() {
-        Role role = new Role("Admin");
-        Utilisateur utilisateur = new Utilisateur("Manca", "Mirko", "m.manca@student.helmo.be", "P4$$word", "m4loje", role);
+        Role role = new Role("Boss");
+        Utilisateur utilisateur = new Utilisateur("Juve", "Matteo", "m.juve@student.helmo.be", "P4$$word", "a1b2c3", role);
         roleRepository.save(role);
         repository.save(utilisateur);
-        Optional<Utilisateur> founded = repository.findByEmail("m.manca@student.helmo.be");
-        Optional<Role> foundedRole = roleRepository.findByRole("Admin");
+        Optional<Utilisateur> founded = repository.findByEmail("m.juve@student.helmo.be");
+        Optional<Role> foundedRole = roleRepository.findByRole("Boss");
         assertTrue(founded.isPresent());
         assertEquals(1, repository.count());
 
-        assertEquals("Manca", founded.get().getNom());
-        assertEquals("Mirko", founded.get().getPrenom());
+        assertEquals("Juve", founded.get().getNom());
+        assertEquals("Matteo", founded.get().getPrenom());
         assertEquals("P4$$word", founded.get().getMotDePasse());
-        assertEquals("m4loje", founded.get().getCode());
-        assertEquals("m.manca@student.helmo.be", founded.get().getEmail());
-        assertEquals("Admin", founded.get().getRole().getRole());
+        assertEquals("a1b2c3", founded.get().getCode());
+        assertEquals("m.juve@student.helmo.be", founded.get().getEmail());
+        assertEquals("Boss", founded.get().getRole().getRole());
     }
+
 }

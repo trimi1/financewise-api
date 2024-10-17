@@ -2,10 +2,12 @@ package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -26,29 +28,31 @@ public class IObjectifRepositoryTests {
     private IDeviseRepository deviseRepository;
 
     @Test
+    @Transactional
     public void should_insert_objectif() {
-        Devise devise = new Devise("Euro");
-        Role role = new Role("Admin");
-        Utilisateur utilisateur = new Utilisateur("Manca", "Mirko", "m.manca@student.helmo.be", "P4$$word", "m4loje", role);
-        Objectif objectif = new Objectif("Ferrari", 215713, LocalDate.of(2025, 1, 1).atStartOfDay(), devise, "Met 1 euro dans un pot tous les jours.", utilisateur);
+        Devise devise = new Devise("Yen");
+        Role role = new Role("Contributor");
+        Utilisateur utilisateur = new Utilisateur("Dupont", "Claire", "c.dupont@student.helmo.be", "P4$$word", "95a8ze", role);
+        Objectif objectif = new Objectif("Lamborghini", 300000, LocalDate.of(2026, 6, 1).atStartOfDay(), devise, "Met 1 yen dans un pot tous les jours.", utilisateur);
 
         deviseRepository.save(devise);
         roleRepository.save(role);
         utilisateurRepository.save(utilisateur);
         objectifRepository.save(objectif);
 
-        Optional<Objectif> founded = objectifRepository.findByNom("Ferrari");
+        Optional<Objectif> founded = objectifRepository.findByNom("Lamborghini");
         assertTrue(founded.isPresent());
 
-        assertEquals("Ferrari", founded.get().getNom());
-        assertEquals(215713, founded.get().getMontant());
+        assertEquals("Lamborghini", founded.get().getNom());
+        assertEquals(300000, founded.get().getMontant());
 
         assertEquals(1, founded.get().getDateLimite().getDayOfMonth());
-        assertEquals(1, founded.get().getDateLimite().getMonthValue());
-        assertEquals(2025, founded.get().getDateLimite().getYear());
+        assertEquals(6, founded.get().getDateLimite().getMonthValue());
+        assertEquals(2026, founded.get().getDateLimite().getYear());
 
-        assertEquals("Euro", founded.get().getDevise().getDevise());
-        assertEquals("Met 1 euro dans un pot tous les jours.", founded.get().getRecommandation());
-        assertEquals("Mirko", founded.get().getUtilisateur().getPrenom());
+        assertEquals("Yen", founded.get().getDevise().getDevise());
+        assertEquals("Met 1 yen dans un pot tous les jours.", founded.get().getRecommandation());
+        assertEquals("Claire", founded.get().getUtilisateur().getPrenom());
     }
+
 }

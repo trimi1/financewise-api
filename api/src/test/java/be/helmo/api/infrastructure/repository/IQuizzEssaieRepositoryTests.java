@@ -5,6 +5,8 @@ import be.helmo.api.infrastructure.model.Quizz;
 import be.helmo.api.infrastructure.model.QuizzEssaie;
 import be.helmo.api.infrastructure.model.Role;
 import be.helmo.api.infrastructure.model.Utilisateur;
+import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,11 +30,12 @@ public class IQuizzEssaieRepositoryTests {
     private IRoleRepository roleRepository;
 
     @Test
+    @Transactional
     public void should_insert_quizzessaie() {
-        Role role = new Role("Admin");
-        Utilisateur utilisateur = new Utilisateur("Manca", "Mirko", "m.manca@student.helmo.be", "P4$$word", "m4loje", role);
-        Quizz quizz = new Quizz("Finance #1");
-        QuizzEssaie quizzEssaie = new QuizzEssaie(quizz, utilisateur, 42);
+        Role role = new Role("Tester");
+        Utilisateur utilisateur = new Utilisateur("Robert", "Louis", "l.robert@student.helmo.be", "P4$$word", "4f6h7g", role);
+        Quizz quizz = new Quizz("Finance #3");
+        QuizzEssaie quizzEssaie = new QuizzEssaie(quizz, utilisateur, 50);
 
         roleRepository.save(role);
         utilisateurRepository.save(utilisateur);
@@ -42,8 +45,9 @@ public class IQuizzEssaieRepositoryTests {
         Optional<QuizzEssaie> founded = repository.findById(1);
         assertTrue(founded.isPresent());
 
-        assertEquals("Finance #1", founded.get().getQuizz().getTitre());
-        assertEquals("Manca", founded.get().getUtilisateur().getNom());
-        assertEquals(42, founded.get().getScore());
+        assertEquals("Finance #3", founded.get().getQuizz().getTitre());
+        assertEquals("Robert", founded.get().getUtilisateur().getNom());
+        assertEquals(50, founded.get().getScore());
     }
+
 }

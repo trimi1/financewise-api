@@ -5,10 +5,12 @@ import be.helmo.api.infrastructure.model.HasAmis;
 import be.helmo.api.infrastructure.model.Permission;
 import be.helmo.api.infrastructure.model.Role;
 import be.helmo.api.infrastructure.model.Utilisateur;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -27,12 +29,14 @@ public class IHasAmisRepositoryTests {
     @Autowired
     IRoleRepository roleRepository;
 
+
     @Test
+    @Transactional
     public void should_insert_ihasamis() {
-        Role role = new Role("Admin");
-        Utilisateur utilisateur = new Utilisateur("Manca", "Mirko", "m.manca@student.helmo.be", "P4$$word", "m4loje", role);
-        Utilisateur utilisateur2 = new Utilisateur("Maghe", "Alexandre", "m.maghe@student.helmo.be", "P4$$word", "95a8ze", role);
-        Permission permission = new Permission("Voir", "Voit les dépenses.");
+        Role role = new Role("Editor");
+        Utilisateur utilisateur = new Utilisateur("Martin", "Sophie", "s.martin@student.helmo.be", "P4$$word", "m4loje", role);
+        Utilisateur utilisateur2 = new Utilisateur("Giraud", "Thomas", "t.giraud@student.helmo.be", "P4$$word", "95a8ze", role);
+        Permission permission = new Permission("Modifier", "Peut modifier les dépenses.");
         HasAmis hasAmis = new HasAmis(utilisateur, utilisateur2, permission);
 
         roleRepository.save(role);
@@ -44,8 +48,9 @@ public class IHasAmisRepositoryTests {
         Optional<HasAmis> foundedHasAmis = hasAmisRepository.findById(1);
         assertTrue(foundedHasAmis.isPresent());
 
-        assertEquals("m.manca@student.helmo.be", foundedHasAmis.get().getUtilisateur().getEmail());
-        assertEquals("m.maghe@student.helmo.be", foundedHasAmis.get().getAmis().getEmail());
-        assertEquals("Voir", foundedHasAmis.get().getPermission().getPermission());
+        assertEquals("s.martin@student.helmo.be", foundedHasAmis.get().getUtilisateur().getEmail());
+        assertEquals("t.giraud@student.helmo.be", foundedHasAmis.get().getAmis().getEmail());
+        assertEquals("Modifier", foundedHasAmis.get().getPermission().getPermission());
     }
+
 }

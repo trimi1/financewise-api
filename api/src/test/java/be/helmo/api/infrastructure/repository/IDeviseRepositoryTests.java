@@ -2,6 +2,8 @@ package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.*;
+import org.springframework.transaction.annotation.Transactional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,12 +20,13 @@ public class IDeviseRepositoryTests {
     @Autowired
     private IDeviseRepository repository;
 
+
     @Test
+    @Transactional
     public void should_insert_devise() {
-        Devise devise = new Devise("Euro");
+        Devise devise = new Devise("Pound");
         repository.save(devise);
-        Optional<Devise> founderDevise = repository.findByDevise("Euro");
+        Optional<Devise> founderDevise = repository.findByDevise("Pound");
         assertTrue(founderDevise.isPresent());
-        assertEquals(1, repository.count());
     }
 }

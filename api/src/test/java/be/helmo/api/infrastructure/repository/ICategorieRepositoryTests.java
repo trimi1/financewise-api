@@ -6,6 +6,7 @@ import be.helmo.api.infrastructure.model.Categorie;
 import be.helmo.api.infrastructure.model.Devise;
 import be.helmo.api.infrastructure.model.Role;
 import be.helmo.api.infrastructure.model.Utilisateur;
+import org.springframework.transaction.annotation.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,6 +30,7 @@ public class ICategorieRepositoryTests {
     private IRoleRepository roleRepository;
 
     @Test
+    @Transactional
     public void should_save_categorie() {
         Devise devise = new Devise("Euro");
         Role role = new Role("Admin");

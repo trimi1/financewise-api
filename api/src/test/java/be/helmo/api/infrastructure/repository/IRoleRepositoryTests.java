@@ -4,10 +4,12 @@ package be.helmo.api.infrastructure.repository;
 import be.helmo.api.app.ApiApplication;
 
 import be.helmo.api.infrastructure.model.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -22,13 +24,14 @@ public class IRoleRepositoryTests {
     private IRoleRepository roleRepository;
 
     @Test
+    @Transactional
     public void should_save_and_delete_role() {
         // Given
-        Role role = new Role("Admin");
+        Role role = new Role("Pro");
         roleRepository.save(role);
-        Optional<Role> foundedRole = roleRepository.findByRole("Admin");
+        Optional<Role> foundedRole = roleRepository.findByRole("Pro");
         assertTrue(foundedRole.isPresent());
-        assertEquals("Admin", foundedRole.get().getRole());
+        assertEquals("Pro", foundedRole.get().getRole());
         roleRepository.delete(foundedRole.get());
         assertEquals(0, roleRepository.count());
     }

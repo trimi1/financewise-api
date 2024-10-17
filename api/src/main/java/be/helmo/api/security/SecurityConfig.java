@@ -13,7 +13,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // TODO : Sur les formulaires, il faut rajoouter un token CSRF
+        // TODO : Sur les formulaires, il faut rajoouter un token CSRF / Passer en HTTPS à l'avenir
         http.csrf(Customizer.withDefaults());
         return http.build();
     }

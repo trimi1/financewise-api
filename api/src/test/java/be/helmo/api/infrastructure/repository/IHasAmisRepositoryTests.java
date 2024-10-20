@@ -22,7 +22,7 @@ public class IHasAmisRepositoryTests {
     @Autowired
     IHasAmisRepository hasAmisRepository;
     @Autowired
-    IUtilisateurRepository utilisateurRepository;
+    IUserRepository utilisateurRepository;
     @Autowired
     IPermissionRepository permissionRepository;
     @Autowired

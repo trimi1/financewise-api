@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ActiveProfiles("test")
 public class IUserRepositoryTests {
     @Autowired
-    private IUtilisateurRepository repository;
+    private IUserRepository repository;
     @Autowired
     private IRoleRepository roleRepository;
 

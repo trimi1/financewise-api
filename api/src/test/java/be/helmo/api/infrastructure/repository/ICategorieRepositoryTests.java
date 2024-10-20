@@ -25,7 +25,7 @@ public class ICategorieRepositoryTests {
     @Autowired
     private IDeviseRepository deviseRepository;
     @Autowired
-    private IUtilisateurRepository utilisateurRepository;
+    private IUserRepository utilisateurRepository;
     @Autowired
     private IRoleRepository roleRepository;
 

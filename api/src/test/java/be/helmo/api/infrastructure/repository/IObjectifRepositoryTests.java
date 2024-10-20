@@ -20,7 +20,7 @@ public class IObjectifRepositoryTests {
     @Autowired
     private IObjectifRepository objectifRepository;
     @Autowired
-    private IUtilisateurRepository utilisateurRepository;
+    private IUserRepository utilisateurRepository;
     @Autowired
     private IRoleRepository roleRepository;
     @Autowired

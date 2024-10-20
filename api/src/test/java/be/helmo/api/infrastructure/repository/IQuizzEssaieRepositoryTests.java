@@ -24,7 +24,7 @@ public class IQuizzEssaieRepositoryTests {
     @Autowired
     private IQuizzRepository quizzRepository;
     @Autowired
-    private IUtilisateurRepository utilisateurRepository;
+    private IUserRepository utilisateurRepository;
     @Autowired
     private IRoleRepository roleRepository;
 

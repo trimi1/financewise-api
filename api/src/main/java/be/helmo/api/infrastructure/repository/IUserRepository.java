@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface IUtilisateurRepository extends JpaRepository<User, Integer> {
+public interface IUserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByEmail(String email);
 
     @Query(value = "SELECT code FROM ue25_26_utilisateur", nativeQuery = true)

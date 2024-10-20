@@ -5,14 +5,13 @@ import be.helmo.api.dto.RegisterUserDto;
 import be.helmo.api.infrastructure.model.Role;
 import be.helmo.api.infrastructure.model.User;
 import be.helmo.api.infrastructure.repository.IRoleRepository;
-import be.helmo.api.infrastructure.repository.IUtilisateurRepository;
+import be.helmo.api.infrastructure.repository.IUserRepository;
 import be.helmo.api.security.AuthenticationResponse;
 import be.helmo.api.tools.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,18 +19,21 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     @Autowired
-    private IUtilisateurRepository repository;
+    private IUserRepository repository;
 
     @Autowired
     private IRoleRepository roleRepository;
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
     private JwtService jwtService;
 
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     private final Utils utils;
@@ -69,22 +71,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    private Role checkRole(String role) {
-        Optional<Role> roleOptional = roleRepository.findByRole(role);
-        if(roleOptional.isEmpty()) {
-            roleRepository.save(new Role(role));
-        }
-        return roleRepository.findByRole(role).get();
-    }
 
-
-
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return repository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    }
 
     public AuthenticationResponse register(RegisterUserDto request) {
         String password = passwordEncoder.encode(request.password());
@@ -99,8 +86,17 @@ public class UserService implements UserDetailsService {
 
     public AuthenticationResponse authenticate(LoginUserDto request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
-        UserDetails user = loadUserByUsername(request.email());
+
+        UserDetails user = repository.findByEmail(request.email()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         String tokenResponse = jwtService.generateToken(user);
         return new AuthenticationResponse(tokenResponse);
+    }
+
+    private Role checkRole(String role) {
+        Optional<Role> roleOptional = roleRepository.findByRole(role);
+        if(roleOptional.isEmpty()) {
+            roleRepository.save(new Role(role));
+        }
+        return roleRepository.findByRole(role).get();
     }
 }

@@ -25,7 +25,7 @@ public class IDepenseRepositoryTests {
     @Autowired
     IRoleRepository roleRepository;
     @Autowired
-    IUtilisateurRepository utilisateurRepository;
+    IUserRepository utilisateurRepository;
     @Autowired
     ICategorieRepository categorieRepository;
     @Autowired

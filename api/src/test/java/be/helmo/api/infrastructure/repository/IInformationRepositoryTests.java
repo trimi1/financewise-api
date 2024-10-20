@@ -21,7 +21,7 @@ public class IInformationRepositoryTests {
     @Autowired
     private IInformationRepository repository;
     @Autowired
-    private IUtilisateurRepository utilisateurRepository;
+    private IUserRepository utilisateurRepository;
     @Autowired
     private IRoleRepository roleRepository;
 

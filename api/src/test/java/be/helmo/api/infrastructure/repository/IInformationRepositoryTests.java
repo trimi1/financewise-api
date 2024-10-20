@@ -36,12 +36,12 @@ public class IInformationRepositoryTests {
         utilisateurRepository.save(user);
         repository.save(information);
 
-        Optional<Information> founded = repository.findByTitre("Tuto");
+        Optional<Information> founded = repository.findByTitle("Tuto");
         assertTrue(founded.isPresent());
 
-        assertEquals("Tuto", founded.get().getTitre());
-        assertEquals("www.youtube.com", founded.get().getLien());
-        assertEquals("Julien", founded.get().getUtilisateur().getPrenom());
+        assertEquals("Tuto", founded.get().getTitle());
+        assertEquals("www.youtube.com", founded.get().getLink());
+        assertEquals("Julien", founded.get().getUtilisateur().getFirstName());
     }
 
 }

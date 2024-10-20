@@ -2,7 +2,6 @@ package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.Quizz;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,9 +26,9 @@ public class IQuizzRepositoryTests {
         Quizz quizz = new Quizz("Finance #10");
 
         repository.save(quizz);
-        Optional<Quizz> founded = repository.findByTitre("Finance #10");
+        Optional<Quizz> founded = repository.findByTitle("Finance #10");
         assertTrue(founded.isPresent());
 
-        assertEquals("Finance #10", founded.get().getTitre());
+        assertEquals("Finance #10", founded.get().getTitle());
     }
 }

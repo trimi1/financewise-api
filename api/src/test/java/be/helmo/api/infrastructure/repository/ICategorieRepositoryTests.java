@@ -42,11 +42,11 @@ public class ICategorieRepositoryTests {
         utilisateurRepository.save(user);
         repository.save(categorie);
 
-        Optional<Categorie> founded = repository.findByCategorie("Voiture");
+        Optional<Categorie> founded = repository.findByName("Voiture");
         assertTrue(founded.isPresent());
 
         assertEquals("Euro", founded.get().getDevise().getDevise());
-        assertEquals("Manca", founded.get().getUtilisateur().getNom());
-        assertEquals("Voiture", founded.get().getCategorie());
+        assertEquals("Manca", founded.get().getUtilisateur().getLastName());
+        assertEquals("Voiture", founded.get().getName());
     }
 }

@@ -3,7 +3,6 @@ package be.helmo.api.infrastructure.repository;
 import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.Quizz;
 import be.helmo.api.infrastructure.model.RessourceQuizz;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +35,7 @@ public class IRessourceQuizzRepositoryTests {
         assertTrue(founded.isPresent());
 
         assertEquals("A, B ou C ?", founded.get().getQuestion());
-        assertEquals("A", founded.get().getReponse());
-        assertEquals("Finance #11", founded.get().getQuizz().getTitre());
+        assertEquals("A", founded.get().getAnswer());
+        assertEquals("Finance #11", founded.get().getQuizz().getTitle());
     }
 }

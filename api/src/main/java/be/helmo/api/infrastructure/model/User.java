@@ -9,20 +9,20 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "UE25_26_UTILISATEUR")
+@Table(name = "UE25_26_USER")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUtilisateur;
+    private int idUser;
 
     @Column(length = 100, nullable = false)
-    private String nom;
+    private String lastName;
 
     @Column(length = 100, nullable = false)
-    private String prenom;
+    private String firstName;
 
-    @Column(length = 250, nullable = false)
+    @Column(length = 250, nullable = false, unique = true)
     private String email;
 
     @Column(length = 255, nullable = false)
@@ -48,37 +48,37 @@ public class User implements UserDetails {
     List<Information> informations;
 
     @OneToMany(mappedBy = "user")
-    List<QuizzEssaie> quizzEssaies;
+    List<QuizzTry> quizzEssays;
 
     @OneToMany(mappedBy = "user")
-    List<HasAmis> amis;
+    List<HasFriends> friends;
 
     protected User() {
     }
 
-    public User(String nom, String prenom, String email, String password, String code, Role role) {
-        this.nom = nom;
-        this.prenom = prenom;
+    public User(String lastName, String firstName, String email, String password, String code, Role role) {
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.email = email;
         this.password = password;
         this.code = code;
         this.role = role;
     }
 
-    public String getNom() {
-        return this.nom;
+    public String getLastName() {
+        return this.lastName;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLastName(String nom) {
+        this.lastName = nom;
     }
 
-    public String getPrenom() {
-        return this.prenom;
+    public String getFirstName() {
+        return this.firstName;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setFirstName(String prenom) {
+        this.firstName = prenom;
     }
 
     public String getEmail() {
@@ -88,8 +88,14 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getCode() {return this.code;}
-    public Role getRole() { return this.role;}
+
+    public String getCode() {
+        return this.code;
+    }
+
+    public Role getRole() {
+        return this.role;
+    }
 
     public List<Depense> getDepenses() {
         return this.depenses;
@@ -123,20 +129,20 @@ public class User implements UserDetails {
         this.informations = informations;
     }
 
-    public List<QuizzEssaie> getQuizzEssaies() {
-        return quizzEssaies;
+    public List<QuizzTry> getQuizzEssaies() {
+        return quizzEssays;
     }
 
-    public void setQuizzEssaies(List<QuizzEssaie> quizzEssaies) {
-        this.quizzEssaies = quizzEssaies;
+    public void setQuizzEssaies(List<QuizzTry> quizzEssays) {
+        this.quizzEssays = quizzEssays;
     }
 
-    public List<HasAmis> getAmis() {
-        return amis;
+    public List<HasFriends> getFriends() {
+        return friends;
     }
 
-    public void setAmis(List<HasAmis> amis) {
-        this.amis = amis;
+    public void setFriends(List<HasFriends> amis) {
+        this.friends = amis;
     }
 
     @Override

@@ -33,8 +33,8 @@ public class IUserRepositoryTests {
         assertTrue(founded.isPresent());
         assertEquals(1, repository.count());
 
-        assertEquals("Juve", founded.get().getNom());
-        assertEquals("Matteo", founded.get().getPrenom());
+        assertEquals("Juve", founded.get().getLastName());
+        assertEquals("Matteo", founded.get().getFirstName());
         assertEquals("P4$$word", founded.get().getPassword());
         assertEquals("a1b2c3", founded.get().getCode());
         assertEquals("m.juve@student.helmo.be", founded.get().getEmail());

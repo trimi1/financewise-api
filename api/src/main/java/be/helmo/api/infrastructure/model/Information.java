@@ -11,38 +11,38 @@ public class Information {
     private int idInformation;
 
     @Column(length = 250, nullable = false)
-    private String titre;
+    private String title;
 
     @Column(length = 500, nullable = false)
-    private String lien;
+    private String link;
 
     @ManyToOne
-    @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
+    @JoinColumn(name = "idUser", nullable = false, referencedColumnName = "idUser")
     private User user;
 
     protected Information() {
     }
 
-    public Information(String titre, String lien, User user) {
-        this.titre = titre;
-        this.lien = lien;
+    public Information(String title, String link, User user) {
+        this.title = title;
+        this.link = link;
         this.user = user;
     }
 
-    public String getTitre() {
-        return this.titre;
+    public String getTitle() {
+        return this.title;
     }
 
-    public void setTitre(String titre) {
-        this.titre = titre;
+    public void setTitle(String titre) {
+        this.title = titre;
     }
 
-    public String getLien() {
-        return this.lien;
+    public String getLink() {
+        return this.link;
     }
 
-    public void setLien(String lien) {
-        this.lien = lien;
+    public void setLink(String lien) {
+        this.link = lien;
     }
 
     public User getUtilisateur() {

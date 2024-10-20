@@ -3,28 +3,28 @@ package be.helmo.api.infrastructure.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "UE25_26_QUIZZ_ESSAIE")
-public class QuizzEssaie {
+@Table(name = "UE25_26_QUIZZ_TRY")
+public class QuizzTry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idQuizzEssaie;
+    private int idQuizzTry;
 
     @ManyToOne
     @JoinColumn(name = "idQuizz", nullable = false, referencedColumnName = "idQuizz")
     private Quizz quizz;
 
     @ManyToOne
-    @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
+    @JoinColumn(name = "idUser", nullable = false, referencedColumnName = "idUser")
     private User user;
 
     @Column(nullable = false)
     private int score;
 
-    protected QuizzEssaie() {
+    protected QuizzTry() {
     }
 
-    public QuizzEssaie(Quizz quizz, User user, int score) {
+    public QuizzTry(Quizz quizz, User user, int score) {
         this.quizz = quizz;
         this.user = user;
         this.score = score;

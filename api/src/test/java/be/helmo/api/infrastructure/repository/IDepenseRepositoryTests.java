@@ -58,11 +58,11 @@ public class IDepenseRepositoryTests {
         objectifRepository.save(objectif);
         depenseRepository.save(depense);
 
-        Optional<Depense> foundedDepense = depenseRepository.findByNom("Ferrari I");
+        Optional<Depense> foundedDepense = depenseRepository.findByName("Ferrari I");
         assertTrue(foundedDepense.isPresent());
 
         assertEquals(1, depenseRepository.count());
-        assertEquals("Ferrari I", foundedDepense.get().getNom());
+        assertEquals("Ferrari I", foundedDepense.get().getName());
         assertEquals(1000, foundedDepense.get().getMontant());
         assertEquals("Dollars", foundedDepense.get().getDevise().getDevise());
 
@@ -70,8 +70,8 @@ public class IDepenseRepositoryTests {
         assertEquals(11, foundedDepense.get().getDate().getMonthValue());
         assertEquals(2024, foundedDepense.get().getDate().getYear());
 
-        assertEquals("Maison", foundedDepense.get().getCategorie().getCategorie());
-        assertEquals("Ferrari", foundedDepense.get().getObjectif().getNom());
+        assertEquals("Maison", foundedDepense.get().getCategorie().getName());
+        assertEquals("Ferrari", foundedDepense.get().getObjectif().getName());
         assertEquals("n.lemaire@student.helmo.be", foundedDepense.get().getUtilisateur().getEmail());
     }
 }

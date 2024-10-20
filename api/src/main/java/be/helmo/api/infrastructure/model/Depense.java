@@ -13,7 +13,7 @@ public class Depense {
     private int idDepense;
 
     @Column(length = 100, nullable = false)
-    private String nom;
+    private String name;
 
     @Column(nullable = false)
     private double montant;
@@ -33,14 +33,14 @@ public class Depense {
     private Objectif objectif;
 
     @ManyToOne
-    @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
+    @JoinColumn(name = "idUser", nullable = false, referencedColumnName = "idUser")
     private User user;
 
     protected Depense() {
     }
 
-    public Depense(String nom, double montant, Devise devise, LocalDateTime date, Categorie categorie, Objectif objectif, User user) {
-        this.nom = nom;
+    public Depense(String name, double montant, Devise devise, LocalDateTime date, Categorie categorie, Objectif objectif, User user) {
+        this.name = name;
         this.montant = montant;
         this.devise = devise;
         this.date = date;
@@ -49,12 +49,12 @@ public class Depense {
         this.user = user;
     }
 
-    public String getNom() {
-        return nom;
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String nom) {
+        this.name = nom;
     }
 
     public double getMontant() {

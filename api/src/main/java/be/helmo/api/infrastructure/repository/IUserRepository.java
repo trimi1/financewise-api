@@ -13,11 +13,11 @@ import java.util.Optional;
 public interface IUserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByEmail(String email);
 
-    @Query(value = "SELECT code FROM ue25_26_utilisateur", nativeQuery = true)
+    @Query(value = "SELECT code FROM ue25_26_user", nativeQuery = true)
     List<String> findAllCodes();
 
     @Modifying
     @Transactional
-    @Query(value = "DBCC CHECKIDENT ('ue25_26_utilisateur', RESEED, 0)", nativeQuery = true)
+    @Query(value = "DBCC CHECKIDENT ('ue25_26_user', RESEED, 0)", nativeQuery = true)
     void resetAutoIncrement();
 }

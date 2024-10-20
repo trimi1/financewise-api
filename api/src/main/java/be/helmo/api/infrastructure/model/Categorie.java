@@ -11,7 +11,7 @@ public class Categorie {
     private int idCategorie;
 
     @Column(length = 50, nullable = false)
-    private String categorie;
+    private String name;
 
     private double montantMax;
 
@@ -20,25 +20,25 @@ public class Categorie {
     private Devise devise;
 
     @ManyToOne
-    @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
+    @JoinColumn(name = "idUser", nullable = false, referencedColumnName = "idUser")
     private User user;
 
     protected Categorie() {
     }
 
-    public Categorie(String categorie, double montantMax, Devise devise, User user) {
-        this.categorie = categorie;
+    public Categorie(String name, double montantMax, Devise devise, User user) {
+        this.name = name;
         this.montantMax = montantMax;
         this.devise = devise;
         this.user = user;
     }
 
-    public String getCategorie() {
-        return categorie;
+    public String getName() {
+        return name;
     }
 
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
+    public void setName(String categorie) {
+        this.name = categorie;
     }
 
     public double getMontantMax() {

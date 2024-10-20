@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface IObjectifRepository extends JpaRepository<Objectif, Integer> {
 
-    Optional<Objectif> findByNom(String nom);
+    Optional<Objectif> findByName(String nom);
 
     @Modifying
     @Transactional

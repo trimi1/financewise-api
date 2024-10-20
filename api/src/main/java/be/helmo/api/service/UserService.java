@@ -50,7 +50,7 @@ public class UserService implements UserDetailsService {
 
     public void addUser(User user) {
         //TODO : Rajouter le cheking ou voir pour supprimer (Méthode idempotente ?)
-        repository.save(user);
+        checkRole(user.getRole().getRole());
     }
 
     public void updateUser(Integer id, User user) {

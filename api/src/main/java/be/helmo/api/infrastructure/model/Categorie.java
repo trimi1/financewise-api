@@ -21,16 +21,16 @@ public class Categorie {
 
     @ManyToOne
     @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
-    private Utilisateur utilisateur;
+    private User user;
 
     protected Categorie() {
     }
 
-    public Categorie(String categorie, double montantMax, Devise devise, Utilisateur utilisateur) {
+    public Categorie(String categorie, double montantMax, Devise devise, User user) {
         this.categorie = categorie;
         this.montantMax = montantMax;
         this.devise = devise;
-        this.utilisateur = utilisateur;
+        this.user = user;
     }
 
     public String getCategorie() {
@@ -57,11 +57,11 @@ public class Categorie {
         this.devise = devise;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public User getUtilisateur() {
+        return user;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setUtilisateur(User user) {
+        this.user = user;
     }
 }

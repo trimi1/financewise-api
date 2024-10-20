@@ -18,15 +18,15 @@ public class Information {
 
     @ManyToOne
     @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
-    private Utilisateur utilisateur;
+    private User user;
 
     protected Information() {
     }
 
-    public Information(String titre, String lien, Utilisateur utilisateur) {
+    public Information(String titre, String lien, User user) {
         this.titre = titre;
         this.lien = lien;
-        this.utilisateur = utilisateur;
+        this.user = user;
     }
 
     public String getTitre() {
@@ -45,11 +45,11 @@ public class Information {
         this.lien = lien;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public User getUtilisateur() {
+        return user;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setUtilisateur(User user) {
+        this.user = user;
     }
 }

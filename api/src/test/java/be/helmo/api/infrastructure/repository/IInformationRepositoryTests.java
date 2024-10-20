@@ -3,9 +3,8 @@ package be.helmo.api.infrastructure.repository;
 import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.Information;
 import be.helmo.api.infrastructure.model.Role;
-import be.helmo.api.infrastructure.model.Utilisateur;
+import be.helmo.api.infrastructure.model.User;
 import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,11 +29,11 @@ public class IInformationRepositoryTests {
     @Transactional
     public void should_insert_information() {
         Role role = new Role("Viewer");
-        Utilisateur utilisateur = new Utilisateur("Bernard", "Julien", "j.bernard@student.helmo.be", "P4$$word", "m4loje", role);
-        Information information = new Information("Tuto", "www.youtube.com", utilisateur);
+        User user = new User("Bernard", "Julien", "j.bernard@student.helmo.be", "P4$$word", "m4loje", role);
+        Information information = new Information("Tuto", "www.youtube.com", user);
 
         roleRepository.save(role);
-        utilisateurRepository.save(utilisateur);
+        utilisateurRepository.save(user);
         repository.save(information);
 
         Optional<Information> founded = repository.findByTitre("Tuto");

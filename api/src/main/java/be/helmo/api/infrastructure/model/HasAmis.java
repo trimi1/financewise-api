@@ -12,11 +12,11 @@ public class HasAmis {
 
     @ManyToOne
     @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
-    private Utilisateur utilisateur;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "idAmis", nullable = false, referencedColumnName = "idUtilisateur")
-    private Utilisateur amis;
+    private User amis;
 
     @ManyToOne
     @JoinColumn(name = "idPermission", nullable = false, referencedColumnName = "idPermission")
@@ -25,15 +25,15 @@ public class HasAmis {
     protected HasAmis() {
     }
 
-    public HasAmis(Utilisateur utilisateur, Utilisateur amis, Permission permission) {
-        this.utilisateur = utilisateur;
+    public HasAmis(User user, User amis, Permission permission) {
+        this.user = user;
         this.amis = amis;
         this.permission = permission;
     }
 
-    public Utilisateur getUtilisateur() {return utilisateur;}
+    public User getUtilisateur() {return user;}
 
-    public Utilisateur getAmis() {
+    public User getAmis() {
         return this.amis;
     }
 

@@ -2,7 +2,6 @@ package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,12 +31,12 @@ public class IObjectifRepositoryTests {
     public void should_insert_objectif() {
         Devise devise = new Devise("Yen");
         Role role = new Role("Contributor");
-        Utilisateur utilisateur = new Utilisateur("Dupont", "Claire", "c.dupont@student.helmo.be", "P4$$word", "95a8ze", role);
-        Objectif objectif = new Objectif("Lamborghini", 300000, LocalDate.of(2026, 6, 1).atStartOfDay(), devise, "Met 1 yen dans un pot tous les jours.", utilisateur);
+        User user = new User("Dupont", "Claire", "c.dupont@student.helmo.be", "P4$$word", "95a8ze", role);
+        Objectif objectif = new Objectif("Lamborghini", 300000, LocalDate.of(2026, 6, 1).atStartOfDay(), devise, "Met 1 yen dans un pot tous les jours.", user);
 
         deviseRepository.save(devise);
         roleRepository.save(role);
-        utilisateurRepository.save(utilisateur);
+        utilisateurRepository.save(user);
         objectifRepository.save(objectif);
 
         Optional<Objectif> founded = objectifRepository.findByNom("Lamborghini");

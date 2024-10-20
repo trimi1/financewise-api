@@ -29,18 +29,18 @@ public class Objectif {
 
     @ManyToOne
     @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
-    private Utilisateur utilisateur;
+    private User user;
 
     protected Objectif() {
     }
 
-    public Objectif(String nom, double montant, LocalDateTime dateLimite, Devise devise, String recommandation, Utilisateur utilisateur) {
+    public Objectif(String nom, double montant, LocalDateTime dateLimite, Devise devise, String recommandation, User user) {
         this.nom = nom;
         this.montant = montant;
         this.dateLimite = dateLimite;
         this.devise = devise;
         this.recommandation = recommandation;
-        this.utilisateur = utilisateur;
+        this.user = user;
     }
 
     public String getNom() {
@@ -83,11 +83,11 @@ public class Objectif {
         this.recommandation = recommandation;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public User getUtilisateur() {
+        return user;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setUtilisateur(User user) {
+        this.user = user;
     }
 }

@@ -16,7 +16,7 @@ public class QuizzEssaie {
 
     @ManyToOne
     @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
-    private Utilisateur utilisateur;
+    private User user;
 
     @Column(nullable = false)
     private int score;
@@ -24,9 +24,9 @@ public class QuizzEssaie {
     protected QuizzEssaie() {
     }
 
-    public QuizzEssaie(Quizz quizz, Utilisateur utilisateur, int score) {
+    public QuizzEssaie(Quizz quizz, User user, int score) {
         this.quizz = quizz;
-        this.utilisateur = utilisateur;
+        this.user = user;
         this.score = score;
     }
 
@@ -34,8 +34,8 @@ public class QuizzEssaie {
         return quizz;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public User getUtilisateur() {
+        return user;
     }
 
     public int getScore() {

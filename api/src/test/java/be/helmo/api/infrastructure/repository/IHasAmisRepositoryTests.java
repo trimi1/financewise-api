@@ -4,8 +4,7 @@ import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.HasAmis;
 import be.helmo.api.infrastructure.model.Permission;
 import be.helmo.api.infrastructure.model.Role;
-import be.helmo.api.infrastructure.model.Utilisateur;
-import org.junit.jupiter.api.BeforeEach;
+import be.helmo.api.infrastructure.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,14 +33,14 @@ public class IHasAmisRepositoryTests {
     @Transactional
     public void should_insert_ihasamis() {
         Role role = new Role("Editor");
-        Utilisateur utilisateur = new Utilisateur("Martin", "Sophie", "s.martin@student.helmo.be", "P4$$word", "m4loje", role);
-        Utilisateur utilisateur2 = new Utilisateur("Giraud", "Thomas", "t.giraud@student.helmo.be", "P4$$word", "95a8ze", role);
+        User user = new User("Martin", "Sophie", "s.martin@student.helmo.be", "P4$$word", "m4loje", role);
+        User user2 = new User("Giraud", "Thomas", "t.giraud@student.helmo.be", "P4$$word", "95a8ze", role);
         Permission permission = new Permission("Modifier", "Peut modifier les dépenses.");
-        HasAmis hasAmis = new HasAmis(utilisateur, utilisateur2, permission);
+        HasAmis hasAmis = new HasAmis(user, user2, permission);
 
         roleRepository.save(role);
-        utilisateurRepository.save(utilisateur);
-        utilisateurRepository.save(utilisateur2);
+        utilisateurRepository.save(user);
+        utilisateurRepository.save(user2);
         permissionRepository.save(permission);
         hasAmisRepository.save(hasAmis);
 

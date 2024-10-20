@@ -16,7 +16,7 @@ public class Role {
     private String role;
 
     @OneToMany(mappedBy = "role")
-    private List<Utilisateur> utilisateurs;
+    private List<User> users;
 
     protected Role() {
     }

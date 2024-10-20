@@ -1,6 +1,6 @@
 package be.helmo.api.controller;
 
-import be.helmo.api.infrastructure.model.Utilisateur;
+import be.helmo.api.infrastructure.model.User;
 import be.helmo.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +20,9 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public Utilisateur getUserById(@PathVariable Integer id) {
+    public User getUserById(@PathVariable Integer id) {
         System.out.println("id = " + id);
-        Optional<Utilisateur> user = userService.getUser(id);
+        Optional<User> user = userService.getUser(id);
         if (user.isEmpty()) {
             return null;
         }
@@ -30,17 +30,17 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<Utilisateur> getUsers() {
+    public List<User> getUsers() {
         return userService.getUsers();
     }
 
     @PostMapping("/users")
-    public void addUser(@RequestBody Utilisateur user) {
+    public void addUser(@RequestBody User user) {
         userService.addUser(user);
     }
 
     @PostMapping("/users/{id}")
-    public void updateUser(@PathVariable Integer id, @RequestBody Utilisateur user) {
+    public void updateUser(@PathVariable Integer id, @RequestBody User user) {
         userService.updateUser(id, user);
     }
 }

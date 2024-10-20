@@ -4,9 +4,8 @@ import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.Quizz;
 import be.helmo.api.infrastructure.model.QuizzEssaie;
 import be.helmo.api.infrastructure.model.Role;
-import be.helmo.api.infrastructure.model.Utilisateur;
+import be.helmo.api.infrastructure.model.User;
 import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,12 +32,12 @@ public class IQuizzEssaieRepositoryTests {
     @Transactional
     public void should_insert_quizzessaie() {
         Role role = new Role("Tester");
-        Utilisateur utilisateur = new Utilisateur("Robert", "Louis", "l.robert@student.helmo.be", "P4$$word", "4f6h7g", role);
+        User user = new User("Robert", "Louis", "l.robert@student.helmo.be", "P4$$word", "4f6h7g", role);
         Quizz quizz = new Quizz("Finance #3");
-        QuizzEssaie quizzEssaie = new QuizzEssaie(quizz, utilisateur, 50);
+        QuizzEssaie quizzEssaie = new QuizzEssaie(quizz, user, 50);
 
         roleRepository.save(role);
-        utilisateurRepository.save(utilisateur);
+        utilisateurRepository.save(user);
         quizzRepository.save(quizz);
         repository.save(quizzEssaie);
 

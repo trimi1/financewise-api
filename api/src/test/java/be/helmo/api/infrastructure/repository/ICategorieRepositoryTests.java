@@ -5,7 +5,7 @@ import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.Categorie;
 import be.helmo.api.infrastructure.model.Devise;
 import be.helmo.api.infrastructure.model.Role;
-import be.helmo.api.infrastructure.model.Utilisateur;
+import be.helmo.api.infrastructure.model.User;
 import org.springframework.transaction.annotation.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +34,12 @@ public class ICategorieRepositoryTests {
     public void should_save_categorie() {
         Devise devise = new Devise("Euro");
         Role role = new Role("Admin");
-        Utilisateur utilisateur = new Utilisateur("Manca", "Mirko", "m.manca@student.helmo.be", "P4$$word", "m4loje", role);
-        Categorie categorie = new Categorie("Voiture", 2000, devise, utilisateur);
+        User user = new User("Manca", "Mirko", "m.manca@student.helmo.be", "P4$$word", "m4loje", role);
+        Categorie categorie = new Categorie("Voiture", 2000, devise, user);
 
         deviseRepository.save(devise);
         roleRepository.save(role);
-        utilisateurRepository.save(utilisateur);
+        utilisateurRepository.save(user);
         repository.save(categorie);
 
         Optional<Categorie> founded = repository.findByCategorie("Voiture");

@@ -1,12 +1,16 @@
 package be.helmo.api.infrastructure.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "UE25_26_UTILISATEUR")
-public class Utilisateur {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +26,7 @@ public class Utilisateur {
     private String email;
 
     @Column(length = 255, nullable = false)
-    private String motDePasse;
+    private String password;
 
     @Column(length = 6, nullable = false, unique = true)
     private String code;
@@ -31,32 +35,32 @@ public class Utilisateur {
     @JoinColumn(name = "idRole", nullable = false, referencedColumnName = "idRole")
     private Role role;
 
-    @OneToMany(mappedBy = "utilisateur")
+    @OneToMany(mappedBy = "user")
     List<Depense> depenses;
 
-    @OneToMany(mappedBy = "utilisateur")
+    @OneToMany(mappedBy = "user")
     List<Objectif> objectifs;
 
-    @OneToMany(mappedBy = "utilisateur")
+    @OneToMany(mappedBy = "user")
     List<Categorie> categories;
 
-    @OneToMany(mappedBy = "utilisateur")
+    @OneToMany(mappedBy = "user")
     List<Information> informations;
 
-    @OneToMany(mappedBy = "utilisateur")
+    @OneToMany(mappedBy = "user")
     List<QuizzEssaie> quizzEssaies;
 
-    @OneToMany(mappedBy = "utilisateur")
+    @OneToMany(mappedBy = "user")
     List<HasAmis> amis;
 
-    protected Utilisateur() {
+    protected User() {
     }
 
-    public Utilisateur(String nom, String prenom, String email, String motDePasse, String code, Role role) {
+    public User(String nom, String prenom, String email, String password, String code, Role role) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.motDePasse = motDePasse;
+        this.password = password;
         this.code = code;
         this.role = role;
     }
@@ -84,8 +88,6 @@ public class Utilisateur {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getMotDePasse() {return this.motDePasse;}
     public String getCode() {return this.code;}
     public Role getRole() { return this.role;}
 
@@ -135,5 +137,40 @@ public class Utilisateur {
 
     public void setAmis(List<HasAmis> amis) {
         this.amis = amis;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.getRole()));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

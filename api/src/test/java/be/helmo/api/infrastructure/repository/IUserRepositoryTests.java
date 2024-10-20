@@ -2,7 +2,6 @@ package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
 @ActiveProfiles("test")
-public class IUtilisateurRepositoryTests {
+public class IUserRepositoryTests {
     @Autowired
     private IUtilisateurRepository repository;
     @Autowired
@@ -26,17 +25,17 @@ public class IUtilisateurRepositoryTests {
     @Transactional
     public void should_save_utilisateur() {
         Role role = new Role("Boss");
-        Utilisateur utilisateur = new Utilisateur("Juve", "Matteo", "m.juve@student.helmo.be", "P4$$word", "a1b2c3", role);
+        User user = new User("Juve", "Matteo", "m.juve@student.helmo.be", "P4$$word", "a1b2c3", role);
         roleRepository.save(role);
-        repository.save(utilisateur);
-        Optional<Utilisateur> founded = repository.findByEmail("m.juve@student.helmo.be");
+        repository.save(user);
+        Optional<User> founded = repository.findByEmail("m.juve@student.helmo.be");
         Optional<Role> foundedRole = roleRepository.findByRole("Boss");
         assertTrue(founded.isPresent());
         assertEquals(1, repository.count());
 
         assertEquals("Juve", founded.get().getNom());
         assertEquals("Matteo", founded.get().getPrenom());
-        assertEquals("P4$$word", founded.get().getMotDePasse());
+        assertEquals("P4$$word", founded.get().getPassword());
         assertEquals("a1b2c3", founded.get().getCode());
         assertEquals("m.juve@student.helmo.be", founded.get().getEmail());
         assertEquals("Boss", founded.get().getRole().getRole());

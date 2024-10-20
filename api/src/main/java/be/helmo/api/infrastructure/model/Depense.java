@@ -34,19 +34,19 @@ public class Depense {
 
     @ManyToOne
     @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
-    private Utilisateur utilisateur;
+    private User user;
 
     protected Depense() {
     }
 
-    public Depense(String nom, double montant, Devise devise, LocalDateTime date, Categorie categorie, Objectif objectif, Utilisateur utilisateur) {
+    public Depense(String nom, double montant, Devise devise, LocalDateTime date, Categorie categorie, Objectif objectif, User user) {
         this.nom = nom;
         this.montant = montant;
         this.devise = devise;
         this.date = date;
         this.categorie = categorie;
         this.objectif = objectif;
-        this.utilisateur = utilisateur;
+        this.user = user;
     }
 
     public String getNom() {
@@ -97,11 +97,11 @@ public class Depense {
         this.objectif = objectif;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public User getUtilisateur() {
+        return user;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setUtilisateur(User user) {
+        this.user = user;
     }
 }

@@ -46,14 +46,14 @@ public class IDepenseRepositoryTests {
     public void should_insert_depense() {
         Devise devise = new Devise("Dollars");
         Role role = new Role("Co-Worker");
-        Utilisateur utilisateur = new Utilisateur("Lemaire", "Nicolas", "n.lemaire@student.helmo.be", "P4$$word", "m4loje", role);
-        Categorie categorie = new Categorie("Maison", 2000, devise, utilisateur);
-        Objectif objectif = new Objectif("Ferrari", 215713, LocalDate.of(2025, 1, 1).atStartOfDay(), devise, "Met 1 euro dans un pot tous les jours.", utilisateur);
-        Depense depense = new Depense("Ferrari I", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), categorie, objectif, utilisateur);
+        User user = new User("Lemaire", "Nicolas", "n.lemaire@student.helmo.be", "P4$$word", "m4loje", role);
+        Categorie categorie = new Categorie("Maison", 2000, devise, user);
+        Objectif objectif = new Objectif("Ferrari", 215713, LocalDate.of(2025, 1, 1).atStartOfDay(), devise, "Met 1 euro dans un pot tous les jours.", user);
+        Depense depense = new Depense("Ferrari I", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), categorie, objectif, user);
 
         deviseRepository.save(devise);
         roleRepository.save(role);
-        utilisateurRepository.save(utilisateur);
+        utilisateurRepository.save(user);
         categorieRepository.save(categorie);
         objectifRepository.save(objectif);
         depenseRepository.save(depense);

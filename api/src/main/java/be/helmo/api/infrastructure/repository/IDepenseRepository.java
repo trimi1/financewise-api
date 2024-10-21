@@ -15,7 +15,9 @@ import java.util.Optional;
 public interface IDepenseRepository extends JpaRepository<Depense, Integer> {
 
     Optional<Depense> findByName(String name);
-    List<Depense> findByCategorie(Categorie categorie);
+    List<Depense> findByCategorie_Name(String name);
+    List<Depense> findByUser_Id(Integer id);
+    List<Depense> findByUser_IdAndCategorie_Name(Integer userId, String categorieName);
 
     @Modifying
     @Transactional

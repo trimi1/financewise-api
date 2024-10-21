@@ -144,6 +144,9 @@ public class User implements UserDetails {
     public void setFriends(List<HasFriends> amis) {
         this.friends = amis;
     }
+    public int getId() {
+        return idUser;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -3,6 +3,7 @@ package be.helmo.api.controller;
 import be.helmo.api.infrastructure.model.User;
 import be.helmo.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Optional;
 public class UserController {
 
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -20,23 +21,17 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable Integer id) {
-        System.out.println("id = " + id);
+    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
         Optional<User> user = userService.getUser(id);
-        if (user.isEmpty()) {
-            return null;
+        if(user.isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
-        return user.get();
+        return ResponseEntity.ok(user.get());
     }
 
     @GetMapping("/users")
-    public List<User> getUsers() {
-        return userService.getUsers();
-    }
-
-    @PostMapping("/users")
-    public void addUser(@RequestBody User user) {
-        userService.addUser(user);
+    public ResponseEntity<List<User>> getUsers() {
+        return ResponseEntity.ok(userService.getUsers());
     }
 
     @PostMapping("/users/{id}")

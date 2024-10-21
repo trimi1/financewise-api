@@ -2,7 +2,7 @@ package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
 import be.helmo.api.infrastructure.model.Quizz;
-import be.helmo.api.infrastructure.model.QuizzEssaie;
+import be.helmo.api.infrastructure.model.QuizzTry;
 import be.helmo.api.infrastructure.model.Role;
 import be.helmo.api.infrastructure.model.User;
 import jakarta.transaction.Transactional;
@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
 @ActiveProfiles("test")
-public class IQuizzEssaieRepositoryTests {
+public class IQuizzTryRepositoryTests {
     @Autowired
-    private IQuizzEssaieRepository repository;
+    private IQuizzTryRepository repository;
     @Autowired
     private IQuizzRepository quizzRepository;
     @Autowired
@@ -34,18 +34,18 @@ public class IQuizzEssaieRepositoryTests {
         Role role = new Role("Tester");
         User user = new User("Robert", "Louis", "l.robert@student.helmo.be", "P4$$word", "4f6h7g", role);
         Quizz quizz = new Quizz("Finance #3");
-        QuizzEssaie quizzEssaie = new QuizzEssaie(quizz, user, 50);
+        QuizzTry quizzTry = new QuizzTry(quizz, user, 50);
 
         roleRepository.save(role);
         utilisateurRepository.save(user);
         quizzRepository.save(quizz);
-        repository.save(quizzEssaie);
+        repository.save(quizzTry);
 
-        Optional<QuizzEssaie> founded = repository.findById(1);
+        Optional<QuizzTry> founded = repository.findById(1);
         assertTrue(founded.isPresent());
 
-        assertEquals("Finance #3", founded.get().getQuizz().getTitre());
-        assertEquals("Robert", founded.get().getUtilisateur().getNom());
+        assertEquals("Finance #3", founded.get().getQuizz().getTitle());
+        assertEquals("Robert", founded.get().getUtilisateur().getLastName());
         assertEquals(50, founded.get().getScore());
     }
 

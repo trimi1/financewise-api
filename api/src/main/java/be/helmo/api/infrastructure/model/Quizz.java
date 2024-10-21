@@ -13,7 +13,7 @@ public class Quizz {
     private int idQuizz;
 
     @Column(length = 250, nullable = false, unique = true)
-    private String titre;
+    private String title;
 
     @OneToMany(mappedBy = "quizz")
     private List<RessourceQuizz> ressourcesQuizz;
@@ -21,11 +21,11 @@ public class Quizz {
     protected Quizz() {
     }
 
-    public Quizz(String titre) {
-        this.titre = titre;
+    public Quizz(String title) {
+        this.title = title;
     }
 
-    public String getTitre() {
-        return titre;
+    public String getTitle() {
+        return title;
     }
 }

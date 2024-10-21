@@ -67,7 +67,7 @@ public class UserService {
             }
 
             role = roleRepository.findByRole("User");
-            role.ifPresent(value -> repository.save(new User(user.getNom(), user.getPrenom(), user.getEmail(), user.getPassword(), this.utils.generateCode(codes), value)));
+            role.ifPresent(value -> repository.save(new User(user.getLastName(), user.getFirstName(), user.getEmail(), user.getPassword(), this.utils.generateCode(codes), value)));
         }
     }
 

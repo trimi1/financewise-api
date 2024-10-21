@@ -39,19 +39,19 @@ public class IObjectifRepositoryTests {
         utilisateurRepository.save(user);
         objectifRepository.save(objectif);
 
-        Optional<Objectif> founded = objectifRepository.findByNom("Lamborghini");
+        Optional<Objectif> founded = objectifRepository.findByName("Lamborghini");
         assertTrue(founded.isPresent());
 
-        assertEquals("Lamborghini", founded.get().getNom());
+        assertEquals("Lamborghini", founded.get().getName());
         assertEquals(300000, founded.get().getMontant());
 
-        assertEquals(1, founded.get().getDateLimite().getDayOfMonth());
-        assertEquals(6, founded.get().getDateLimite().getMonthValue());
-        assertEquals(2026, founded.get().getDateLimite().getYear());
+        assertEquals(1, founded.get().getDeadline().getDayOfMonth());
+        assertEquals(6, founded.get().getDeadline().getMonthValue());
+        assertEquals(2026, founded.get().getDeadline().getYear());
 
         assertEquals("Yen", founded.get().getDevise().getDevise());
-        assertEquals("Met 1 yen dans un pot tous les jours.", founded.get().getRecommandation());
-        assertEquals("Claire", founded.get().getUtilisateur().getPrenom());
+        assertEquals("Met 1 yen dans un pot tous les jours.", founded.get().getRecommendation());
+        assertEquals("Claire", founded.get().getUser().getFirstName());
     }
 
 }

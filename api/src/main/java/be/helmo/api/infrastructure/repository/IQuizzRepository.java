@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface IQuizzRepository extends JpaRepository<Quizz, Integer> {
 
-    Optional<Quizz> findByTitre(String titre);
+    Optional<Quizz> findByTitle(String titre);
 
     @Modifying
     @Transactional

@@ -14,7 +14,7 @@ public class RessourceQuizz {
     private String question;
 
     @Column(length = 250, nullable = false)
-    private String reponse;
+    private String answer;
 
     @ManyToOne
     @JoinColumn(name = "idQuizz", nullable = false, referencedColumnName = "idQuizz")
@@ -23,9 +23,9 @@ public class RessourceQuizz {
     protected RessourceQuizz() {
     }
 
-    public RessourceQuizz(String question, String reponse, Quizz quizz) {
+    public RessourceQuizz(String question, String answer, Quizz quizz) {
         this.question = question;
-        this.reponse = reponse;
+        this.answer = answer;
         this.quizz = quizz;
     }
 
@@ -33,8 +33,8 @@ public class RessourceQuizz {
         return question;
     }
 
-    public String getReponse() {
-        return reponse;
+    public String getAnswer() {
+        return answer;
     }
 
     public Quizz getQuizz() {

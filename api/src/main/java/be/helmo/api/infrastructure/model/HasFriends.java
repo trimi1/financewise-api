@@ -3,38 +3,38 @@ package be.helmo.api.infrastructure.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "UE25_26_HAS_AMIS")
-public class HasAmis {
+@Table(name = "UE25_26_HAS_FRIENDS")
+public class HasFriends {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idHasAmis;
+    private int idHasFriends;
 
     @ManyToOne
-    @JoinColumn(name = "idUtilisateur", nullable = false, referencedColumnName = "idUtilisateur")
+    @JoinColumn(name = "idUser", nullable = false, referencedColumnName = "idUser")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "idAmis", nullable = false, referencedColumnName = "idUtilisateur")
-    private User amis;
+    @JoinColumn(name = "idfriend", nullable = false, referencedColumnName = "idUser")
+    private User friend;
 
     @ManyToOne
     @JoinColumn(name = "idPermission", nullable = false, referencedColumnName = "idPermission")
     private Permission permission;
 
-    protected HasAmis() {
+    protected HasFriends() {
     }
 
-    public HasAmis(User user, User amis, Permission permission) {
+    public HasFriends(User user, User friend, Permission permission) {
         this.user = user;
-        this.amis = amis;
+        this.friend = friend;
         this.permission = permission;
     }
 
     public User getUtilisateur() {return user;}
 
-    public User getAmis() {
-        return this.amis;
+    public User getFriend() {
+        return this.friend;
     }
 
     public Permission getPermission() {

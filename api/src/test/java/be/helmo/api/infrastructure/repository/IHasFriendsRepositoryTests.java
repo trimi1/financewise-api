@@ -1,7 +1,7 @@
 package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
-import be.helmo.api.infrastructure.model.HasAmis;
+import be.helmo.api.infrastructure.model.HasFriends;
 import be.helmo.api.infrastructure.model.Permission;
 import be.helmo.api.infrastructure.model.Role;
 import be.helmo.api.infrastructure.model.User;
@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
 @ActiveProfiles("test")
-public class IHasAmisRepositoryTests {
+public class IHasFriendsRepositoryTests {
     @Autowired
-    IHasAmisRepository hasAmisRepository;
+    IHasFriendsRepository hasAmisRepository;
     @Autowired
     IUserRepository utilisateurRepository;
     @Autowired
@@ -36,19 +36,19 @@ public class IHasAmisRepositoryTests {
         User user = new User("Martin", "Sophie", "s.martin@student.helmo.be", "P4$$word", "m4loje", role);
         User user2 = new User("Giraud", "Thomas", "t.giraud@student.helmo.be", "P4$$word", "95a8ze", role);
         Permission permission = new Permission("Modifier", "Peut modifier les dépenses.");
-        HasAmis hasAmis = new HasAmis(user, user2, permission);
+        HasFriends hasFriends = new HasFriends(user, user2, permission);
 
         roleRepository.save(role);
         utilisateurRepository.save(user);
         utilisateurRepository.save(user2);
         permissionRepository.save(permission);
-        hasAmisRepository.save(hasAmis);
+        hasAmisRepository.save(hasFriends);
 
-        Optional<HasAmis> foundedHasAmis = hasAmisRepository.findById(1);
+        Optional<HasFriends> foundedHasAmis = hasAmisRepository.findById(1);
         assertTrue(foundedHasAmis.isPresent());
 
         assertEquals("s.martin@student.helmo.be", foundedHasAmis.get().getUtilisateur().getEmail());
-        assertEquals("t.giraud@student.helmo.be", foundedHasAmis.get().getAmis().getEmail());
+        assertEquals("t.giraud@student.helmo.be", foundedHasAmis.get().getFriend().getEmail());
         assertEquals("Modifier", foundedHasAmis.get().getPermission().getPermission());
     }
 

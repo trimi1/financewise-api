@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -20,21 +22,49 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
-        Optional<User> user = userService.getUser(id);
-        if(user.isEmpty()) {
+    @GetMapping("/financewise/users/{email}")
+    public ResponseEntity<Map<String, Object>> getUserByEmail(@PathVariable String email, @RequestParam(required = false) String fields) {
+        Optional<User> handleUser = userService.getUserByEmail(email);
+        if(handleUser.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(user.get());
+
+        Map<String, Object> response = new HashMap<>();
+        User user = handleUser.get();
+        if(fields != null) {
+            String[] fieldArray = fields.split(",");
+            for (String field : fieldArray) {
+                switch (field.trim()) {
+                    case "lastName":
+                        response.put("lastName", user.getLastName());
+                        break;
+                    case "firstName":
+                        response.put("firstName", user.getFirstName());
+                        break;
+                    case "email":
+                        response.put("email", user.getEmail());
+                        break;
+                    case "code":
+                        response.put("code", user.getCode());
+                        break;
+                    case "role":
+                        response.put("role", user.getRole());
+                        break;
+                }
+            }
+
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.ok(Map.of("user", user));
+        }
     }
 
-    @GetMapping("/users")
+    @GetMapping("/financewise/users")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
     }
 
-    @PostMapping("/users/{id}")
+    @PostMapping("/financewise/users/{id}")
     public void updateUser(@PathVariable Integer id, @RequestBody User user) {
         userService.updateUser(id, user);
     }

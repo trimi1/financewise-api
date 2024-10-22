@@ -22,7 +22,7 @@ import java.util.*;
 public class UserService {
 
     @Autowired
-    private IUserRepository repository;
+    private IUserRepository userRepository;
 
     @Autowired
     private IRoleRepository roleRepository;
@@ -43,45 +43,15 @@ public class UserService {
     }
 
     public Optional<User> getUser(Integer id) {
-        return repository.findById(id);
+        return userRepository.findById(id);
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public List<User> getUsers() {
-        return repository.findAll();
-    }
-
-    public AuthenticationResponse register(RegisterUserDto request) {
-        String password = passwordEncoder.encode(request.password());
-        List<String> codes = repository.findAllCodes();
-        String code = this.utils.generateCode(codes);
-        Role role = checkRole("User");
-        User user = new User(request.lastName(), request.firstName(), request.email(), password, code, role);
-        repository.save(user);
-        String tokenResponse = jwtService.generateToken(user);
-        return new AuthenticationResponse(tokenResponse);
-    }
-
-    public AuthenticationResponse authenticate(LoginUserDto request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
-        UserDetails user = repository.findByEmail(request.email()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        String tokenResponse = jwtService.generateToken(user);
-        return new AuthenticationResponse(tokenResponse);
-    }
-
-    public void updateUser(Integer id, User user) {
-        Optional<User> userOptional = repository.findById(id);
-        if (userOptional.isPresent()) {
-            repository.save(user);
-        } else {
-            List<String> codes = repository.findAllCodes();
-            Optional<Role> role = roleRepository.findByRole("User");
-            if(role.isEmpty()) {
-                roleRepository.save(new Role("User"));
-            }
-
-            role = roleRepository.findByRole("User");
-            role.ifPresent(value -> repository.save(new User(user.getLastName(), user.getFirstName(), user.getEmail(), user.getPassword(), this.utils.generateCode(codes), value)));
-        }
+        return userRepository.findAll();
     }
 
     private Role checkRole(String role) {
@@ -90,5 +60,39 @@ public class UserService {
             roleRepository.save(new Role(role));
         }
         return roleRepository.findByRole(role).get();
+    }
+
+    public AuthenticationResponse register(RegisterUserDto request) {
+        String password = passwordEncoder.encode(request.password());
+        List<String> codes = userRepository.findAllCodes();
+        String code = this.utils.generateCode(codes);
+        Role role = checkRole("User");
+        User user = new User(request.lastName(), request.firstName(), request.email(), password, code, role);
+        userRepository.save(user);
+        String tokenResponse = jwtService.generateToken(user);
+        return new AuthenticationResponse(tokenResponse);
+    }
+
+    public AuthenticationResponse authenticate(LoginUserDto request) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
+        UserDetails user = userRepository.findByEmail(request.email()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        String tokenResponse = jwtService.generateToken(user);
+        return new AuthenticationResponse(tokenResponse);
+    }
+
+    public void updateUser(Integer id, User user) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            userRepository.save(user);
+        } else {
+            List<String> codes = userRepository.findAllCodes();
+            Optional<Role> role = roleRepository.findByRole("User");
+            if(role.isEmpty()) {
+                roleRepository.save(new Role("User"));
+            }
+
+            role = roleRepository.findByRole("User");
+            role.ifPresent(value -> userRepository.save(new User(user.getLastName(), user.getFirstName(), user.getEmail(), user.getPassword(), this.utils.generateCode(codes), value)));
+        }
     }
 }

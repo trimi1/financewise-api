@@ -55,11 +55,11 @@ public class DepenseService {
         depenseRepository.deleteById(id);
     }
 
-    public List<Depense> getDepensesByCategorie(Integer id, String name) {
-        return depenseRepository.findByUser_IdAndCategorie_Name(id, name);
+    public List<Depense> getDepensesByCategorie(String email, String name) {
+        return depenseRepository.findByUser_EmailAndCategorie_Name(email, name);
     }
 
-    public List<Depense> getDepensesByUser(Integer id) {
-        return depenseRepository.findByUser_Id(id);
+    public List<Depense> getDepensesByUser(String email) {
+        return depenseRepository.findByUser_Email(email);
     }
 }

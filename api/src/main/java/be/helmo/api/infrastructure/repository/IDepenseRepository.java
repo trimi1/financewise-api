@@ -16,8 +16,8 @@ public interface IDepenseRepository extends JpaRepository<Depense, Integer> {
 
     Optional<Depense> findByName(String name);
     List<Depense> findByCategorie_Name(String name);
-    List<Depense> findByUser_Id(Integer id);
-    List<Depense> findByUser_IdAndCategorie_Name(Integer userId, String categorieName);
+    List<Depense> findByUser_Email(String email);
+    List<Depense> findByUser_EmailAndCategorie_Name(String email, String categorieName);
 
     @Modifying
     @Transactional

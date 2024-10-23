@@ -118,7 +118,7 @@ public class IDepenseRepositoryTests {
 
         List<Depense> depenses = depenseRepository.findByCategorie_Name("Maison");
         assertEquals(2, depenses.size());
-        List<Depense> depenseList = depenseRepository.findByUser_IdAndCategorie_Name(user.getId(), "Maison");
+        List<Depense> depenseList = depenseRepository.findByUser_EmailAndCategorie_Name(user.getEmail(), "Maison");
         assertEquals(2, depenseList.size());
     }
 
@@ -152,9 +152,9 @@ public class IDepenseRepositoryTests {
         depenseRepository.save(depenseTh);
         depenseRepository.flush();
 
-        List<Depense> depenses = depenseRepository.findByUser_Id(user.getId());
+        List<Depense> depenses = depenseRepository.findByUser_Email(user.getEmail());
         assertEquals(2, depenses.size());
-        List<Depense> depensesUser = depenseRepository.findByUser_IdAndCategorie_Name(user.getId(), "Maison");
-        assertEquals(2, depenses.size());
+        List<Depense> depensesUser = depenseRepository.findByUser_EmailAndCategorie_Name(user.getEmail(), "Maison");
+        assertEquals(2, depensesUser.size());
     }
 }

@@ -1,15 +1,17 @@
 package be.helmo.api.controller;
 
+import be.helmo.api.dto.DepenseDTO;
+import be.helmo.api.dto.mappers.DepenseMapper;
 import be.helmo.api.infrastructure.model.Depense;
 import be.helmo.api.service.DepenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class DepenseController {
@@ -21,25 +23,24 @@ public class DepenseController {
         this.depenseService = depenseService;
     }
 
-    @GetMapping("/depenses/{id}")
+    @GetMapping("/financewise/depenses/{id}")
     public ResponseEntity<Depense> getDepenseById(@PathVariable int id) {
         Optional<Depense> depense = depenseService.getDepenseById(id);
         return ResponseEntity.ok(depense.get());
     }
 
-    @GetMapping("/depenses")
-    public ResponseEntity<List<Depense>> getAllDepenses() {
-        return ResponseEntity.ok(depenseService.getDepenses());
+    @GetMapping("/financewise/depenses/users/{email}")
+    public ResponseEntity<List<DepenseDTO>> getUserDepenses(@PathVariable String email, @RequestParam(required = false) String fields) {
+        List<Depense> depenses = depenseService.getDepensesByUser(email);
+        List<DepenseDTO> depenseDTO = DepenseMapper.toDTOList(depenses);
+        return ResponseEntity.ok(depenseDTO);
     }
 
-    @GetMapping("/users/{id}/depenses")
-    public ResponseEntity<List<Depense>> getUserDepenses(@PathVariable int id) {
-        return ResponseEntity.ok(depenseService.getDepensesByUser(id));
-    }
-
-    @GetMapping("/users/{id}/depenses/categorie/{cat_name}")
-    public ResponseEntity<List<Depense>> getUserDepensesByCategory(@PathVariable int id, @PathVariable String cat_name) {
-        return ResponseEntity.ok(depenseService.getDepensesByCategorie(id, cat_name));
+    @GetMapping("/financewise/depenses/users/{email}/categorie/{cat_name}")
+    public ResponseEntity<List<DepenseDTO>> getUserDepensesByCategory(@PathVariable String email, @PathVariable String cat_name, @RequestParam(required = false) String fields) {
+        List<Depense> depenses = depenseService.getDepensesByCategorie(email, cat_name);
+        List<DepenseDTO> depenseDTO = DepenseMapper.toDTOList(depenses);
+        return ResponseEntity.ok(depenseDTO);
     }
 
 }

@@ -7,12 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface IObjectifRepository extends JpaRepository<Objectif, Integer> {
 
     Optional<Objectif> findByName(String nom);
+
+    List<Objectif> findObjectifsByUser_Id(int idUser);
 
     @Modifying
     @Transactional

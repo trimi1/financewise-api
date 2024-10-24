@@ -42,5 +42,4 @@ public class DepenseController {
         List<DepenseDTO> depenseDTO = DepenseMapper.toDTOList(depenses);
         return ResponseEntity.ok(depenseDTO);
     }
-
 }

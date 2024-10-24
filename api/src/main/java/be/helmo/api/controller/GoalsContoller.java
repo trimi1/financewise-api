@@ -48,5 +48,4 @@ public class GoalsContoller {
         goalService.deleteGoals(idUser, goals);
     }
 
-
 }

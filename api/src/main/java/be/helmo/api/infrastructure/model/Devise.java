@@ -20,6 +20,14 @@ public class Devise {
         this.devise = devise;
     }
 
+    public int getIdDevise() {
+        return this.idDevise;
+    }
+
+    public void setIdDevise(int idDevise) {
+        this.idDevise = idDevise;
+    }
+
     public String getDevise() {
         return this.devise;
     }

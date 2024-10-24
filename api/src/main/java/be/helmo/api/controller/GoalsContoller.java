@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/financewise/goals")
+@RestController
 public class GoalsContoller {
     
-    private final GoalsService goalService;
+    private GoalsService goalService;
     
     @Autowired
     public GoalsContoller(GoalsService goalService) {
@@ -23,7 +23,7 @@ public class GoalsContoller {
      * @param idUser user id
      * @return the list of goals from a user
      */
-    @GetMapping("/users/{idUser}")
+    @GetMapping("/financewise/goals/users/{idUser}")
     public ResponseEntity<List<GoalsDTO>> getGoalsByUser(@PathVariable int idUser) {
         return ResponseEntity.ok(goalService.getGoalsByUserId(idUser));
     }
@@ -33,7 +33,7 @@ public class GoalsContoller {
      * @param idUser user id
      * @param goals list of goals
      */
-    @PostMapping("/users/{idUser}")
+    @PostMapping("/financewise/goals/users/{idUser}")
     public void addGoals(@PathVariable int idUser, @RequestBody List<GoalsDTO> goals) {
         goalService.addGoals(idUser, goals);
     }
@@ -43,7 +43,7 @@ public class GoalsContoller {
      * @param idUser user id
      * @param goals list of goals
      */
-    @PutMapping("/users/{idUser}")
+    @PutMapping("/financewise/goals/users/{idUser}")
     public void updateGoals(@PathVariable int idUser, @RequestBody List<GoalsDTO> goals) {
         goalService.updateGoals(idUser, goals);
     }
@@ -53,7 +53,7 @@ public class GoalsContoller {
      * @param idUser user id
      * @param goals list of goals
      */
-    @DeleteMapping("/users/{idUser}")
+    @DeleteMapping("/financewise/goals/users/{idUser}")
     public void deleteGoals(@PathVariable int idUser, @RequestBody List<GoalsDTO> goals) {
         goalService.deleteGoals(idUser, goals);
     }

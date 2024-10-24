@@ -51,6 +51,11 @@ public class GoalsService {
     }
 
     public void updateGoals(int idUser, List<GoalsDTO> goals) {
+        List<GoalsDTO> toCreate = goals.stream().filter(goal -> goal.id() <= 0).toList();
+        List<GoalsDTO> toUpdate = goals.stream().filter(goal -> goal.id() > 0).toList();
+        addGoals(idUser, toCreate);
+
+
     }
 
     public void deleteGoals(int idUser, List<GoalsDTO> goals) {

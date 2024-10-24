@@ -25,7 +25,7 @@ public class GoalsService {
     private IUserRepository userRepository;
 
     @Autowired
-    IDeviseRepository deviseRepository;
+    private IDeviseRepository deviseRepository;
 
     public GoalsService() {
     }

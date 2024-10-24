@@ -26,19 +26,19 @@ public class IDepenseRepositoryTests {
     @Autowired
     IRoleRepository roleRepository;
     @Autowired
-    IUserRepository utilisateurRepository;
+    IUserRepository userRepository;
     @Autowired
     ICategorieRepository categorieRepository;
     @Autowired
-    IObjectifRepository objectifRepository;
+    IGoalsRepository goalsRepository;
 
     @BeforeEach
     public void setUp() {
         depenseRepository.deleteAll();
         categorieRepository.deleteAll();
-        objectifRepository.deleteAll();
+        goalsRepository.deleteAll();
         deviseRepository.deleteAll();
-        utilisateurRepository.deleteAll();
+        userRepository.deleteAll();
         roleRepository.deleteAll();
     }
 
@@ -54,9 +54,9 @@ public class IDepenseRepositoryTests {
 
         deviseRepository.save(devise);
         roleRepository.save(role);
-        utilisateurRepository.save(user);
+        userRepository.save(user);
         categorieRepository.save(categorie);
-        objectifRepository.save(objectif);
+        goalsRepository.save(objectif);
         depenseRepository.save(depense);
 
         Optional<Depense> foundedDepense = depenseRepository.findByName("Ferrari I");
@@ -91,14 +91,14 @@ public class IDepenseRepositoryTests {
 
         deviseRepository.save(devise);
         roleRepository.save(role);
-        utilisateurRepository.save(user);
+        userRepository.save(user);
         categorieRepository.save(categorie);
         categorieRepository.flush();
         categorieRepository.save(snCategorie);
         categorieRepository.flush();
 
-        objectifRepository.save(objectif);
-        objectifRepository.flush();
+        goalsRepository.save(objectif);
+        goalsRepository.flush();
 
         depenseRepository.save(depense);
         depenseRepository.flush();
@@ -118,7 +118,7 @@ public class IDepenseRepositoryTests {
 
         List<Depense> depenses = depenseRepository.findByCategorie_Name("Maison");
         assertEquals(2, depenses.size());
-        List<Depense> depenseList = depenseRepository.findByUser_EmailAndCategorie_Name(user.getEmail(), "Maison");
+        List<Depense> depenseList = depenseRepository.findByUser_IdAndCategorie_Name(user.getId(), "Maison");
         assertEquals(2, depenseList.size());
     }
 
@@ -139,12 +139,12 @@ public class IDepenseRepositoryTests {
         deviseRepository.flush();
         roleRepository.save(role);
         roleRepository.flush();
-        utilisateurRepository.save(user);
-        utilisateurRepository.flush();
-        utilisateurRepository.save(userSn);
-        utilisateurRepository.flush();
+        userRepository.save(user);
+        userRepository.flush();
+        userRepository.save(userSn);
+        userRepository.flush();
         categorieRepository.save(categorie);
-        objectifRepository.save(objectif);
+        goalsRepository.save(objectif);
         depenseRepository.save(depense);
         depenseRepository.flush();
         depenseRepository.save(depenseSn);
@@ -152,9 +152,9 @@ public class IDepenseRepositoryTests {
         depenseRepository.save(depenseTh);
         depenseRepository.flush();
 
-        List<Depense> depenses = depenseRepository.findByUser_Email(user.getEmail());
+        List<Depense> depenses = depenseRepository.findByUser_Id(user.getId());
         assertEquals(2, depenses.size());
-        List<Depense> depensesUser = depenseRepository.findByUser_EmailAndCategorie_Name(user.getEmail(), "Maison");
+        List<Depense> depensesUser = depenseRepository.findByUser_IdAndCategorie_Name(user.getId(), "Maison");
         assertEquals(2, depensesUser.size());
     }
 }

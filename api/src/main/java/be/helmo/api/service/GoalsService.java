@@ -6,7 +6,7 @@ import be.helmo.api.infrastructure.model.Devise;
 import be.helmo.api.infrastructure.model.Objectif;
 import be.helmo.api.infrastructure.model.User;
 import be.helmo.api.infrastructure.repository.IDeviseRepository;
-import be.helmo.api.infrastructure.repository.IObjectifRepository;
+import be.helmo.api.infrastructure.repository.IGoalsRepository;
 import be.helmo.api.infrastructure.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,7 +19,7 @@ import java.util.Optional;
 public class GoalsService {
 
     @Autowired
-    private IObjectifRepository iObjectifRepository;
+    private IGoalsRepository iGoalsRepository;
 
     @Autowired
     private IUserRepository userRepository;
@@ -31,7 +31,7 @@ public class GoalsService {
     }
 
     public List<GoalsDTO> getGoalsByUserId(int idUser) {
-        List<Objectif> goals = iObjectifRepository.findObjectifsByUser_Id(idUser);
+        List<Objectif> goals = iGoalsRepository.findObjectifsByUser_Id(idUser);
         return GoalsMapper.toDTOList(goals);
     }
 
@@ -46,7 +46,7 @@ public class GoalsService {
             Optional<Devise> handleDevise = deviseRepository.findByDevise(goal.devise());
             Devise devise = handleDevise.orElseGet(() -> deviseRepository.save(new Devise(goal.devise())));
             Objectif objectif = new Objectif(goal.name(), goal.montant(), goal.deadline(), devise, goal.recommendation(), user);
-            iObjectifRepository.save(objectif);
+            iGoalsRepository.save(objectif);
         });
     }
 }

@@ -1,15 +1,12 @@
 package be.helmo.api.service;
 
-import be.helmo.api.infrastructure.model.Categorie;
 import be.helmo.api.infrastructure.model.Depense;
 import be.helmo.api.infrastructure.repository.*;
-import be.helmo.api.tools.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @Service
 public class DepenseService {
@@ -25,7 +22,7 @@ public class DepenseService {
     @Autowired
     private ICategorieRepository categorieRepository;
     @Autowired
-    private IObjectifRepository objectifRepository;
+    private IGoalsRepository objectifRepository;
 
     public DepenseService() {
     }
@@ -55,11 +52,11 @@ public class DepenseService {
         depenseRepository.deleteById(id);
     }
 
-    public List<Depense> getDepensesByCategorie(String email, String name) {
-        return depenseRepository.findByUser_EmailAndCategorie_Name(email, name);
+    public List<Depense> getDepensesByCategorie(int id, String name) {
+        return depenseRepository.findByUser_IdAndCategorie_Name(id, name);
     }
 
-    public List<Depense> getDepensesByUser(String email) {
-        return depenseRepository.findByUser_Email(email);
+    public List<Depense> getDepensesByUserId(int id) {
+        return depenseRepository.findByUser_Id(id);
     }
 }

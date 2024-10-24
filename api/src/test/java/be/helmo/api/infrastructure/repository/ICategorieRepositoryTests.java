@@ -25,7 +25,7 @@ public class ICategorieRepositoryTests {
     @Autowired
     private IDeviseRepository deviseRepository;
     @Autowired
-    private IUserRepository utilisateurRepository;
+    private IUserRepository userRepository;
     @Autowired
     private IRoleRepository roleRepository;
 
@@ -39,7 +39,7 @@ public class ICategorieRepositoryTests {
 
         deviseRepository.save(devise);
         roleRepository.save(role);
-        utilisateurRepository.save(user);
+        userRepository.save(user);
         repository.save(categorie);
 
         Optional<Categorie> founded = repository.findByName("Voiture");

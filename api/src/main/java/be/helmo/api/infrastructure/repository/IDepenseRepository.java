@@ -1,6 +1,5 @@
 package be.helmo.api.infrastructure.repository;
 
-import be.helmo.api.infrastructure.model.Categorie;
 import be.helmo.api.infrastructure.model.Depense;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,8 +15,8 @@ public interface IDepenseRepository extends JpaRepository<Depense, Integer> {
 
     Optional<Depense> findByName(String name);
     List<Depense> findByCategorie_Name(String name);
-    List<Depense> findByUser_Email(String email);
-    List<Depense> findByUser_EmailAndCategorie_Name(String email, String categorieName);
+    List<Depense> findByUser_Id(int id);
+    List<Depense> findByUser_IdAndCategorie_Name(int id, String categorieName);
 
     @Modifying
     @Transactional

@@ -22,7 +22,7 @@ public class IHasFriendsRepositoryTests {
     @Autowired
     IHasFriendsRepository hasAmisRepository;
     @Autowired
-    IUserRepository utilisateurRepository;
+    IUserRepository userRepository;
     @Autowired
     IPermissionRepository permissionRepository;
     @Autowired
@@ -39,8 +39,8 @@ public class IHasFriendsRepositoryTests {
         HasFriends hasFriends = new HasFriends(user, user2, permission);
 
         roleRepository.save(role);
-        utilisateurRepository.save(user);
-        utilisateurRepository.save(user2);
+        userRepository.save(user);
+        userRepository.save(user2);
         permissionRepository.save(permission);
         hasAmisRepository.save(hasFriends);
 

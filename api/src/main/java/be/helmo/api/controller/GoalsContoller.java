@@ -18,11 +18,21 @@ public class GoalsContoller {
         this.goalService = goalService;
     }
 
+    /**
+     * Get goals by user id
+     * @param idUser user id
+     * @return the list of goals from a user
+     */
     @GetMapping("/users/{idUser}")
     public ResponseEntity<List<GoalsDTO>> getGoalsByUser(@PathVariable int idUser) {
         return ResponseEntity.ok(goalService.getGoalsByUserId(idUser));
     }
 
+    /**
+     * Add goals to a user
+     * @param idUser user id
+     * @param goals list of goals
+     */
     @PostMapping("/users/{idUser}")
     public void addGoals(@PathVariable int idUser, @RequestBody List<GoalsDTO> goals) {
         goalService.addGoals(idUser, goals);

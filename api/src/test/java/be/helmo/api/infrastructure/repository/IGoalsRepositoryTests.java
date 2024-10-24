@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
 @ActiveProfiles("test")
-public class IObjectifRepositoryTests {
+public class IGoalsRepositoryTests {
     @Autowired
-    private IObjectifRepository objectifRepository;
+    private IGoalsRepository goalsRepository;
     @Autowired
-    private IUserRepository utilisateurRepository;
+    private IUserRepository userRepository;
     @Autowired
     private IRoleRepository roleRepository;
     @Autowired
@@ -36,10 +36,10 @@ public class IObjectifRepositoryTests {
 
         deviseRepository.save(devise);
         roleRepository.save(role);
-        utilisateurRepository.save(user);
-        objectifRepository.save(objectif);
+        userRepository.save(user);
+        goalsRepository.save(objectif);
 
-        Optional<Objectif> founded = objectifRepository.findByName("Lamborghini");
+        Optional<Objectif> founded = goalsRepository.findByName("Lamborghini");
         assertTrue(founded.isPresent());
 
         assertEquals("Lamborghini", founded.get().getName());

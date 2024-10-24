@@ -21,7 +21,7 @@ public class IInformationRepositoryTests {
     @Autowired
     private IInformationRepository repository;
     @Autowired
-    private IUserRepository utilisateurRepository;
+    private IUserRepository userRepository;
     @Autowired
     private IRoleRepository roleRepository;
 
@@ -33,7 +33,7 @@ public class IInformationRepositoryTests {
         Information information = new Information("Tuto", "www.youtube.com", user);
 
         roleRepository.save(role);
-        utilisateurRepository.save(user);
+        userRepository.save(user);
         repository.save(information);
 
         Optional<Information> founded = repository.findByTitle("Tuto");

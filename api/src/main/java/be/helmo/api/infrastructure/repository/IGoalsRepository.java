@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface IObjectifRepository extends JpaRepository<Objectif, Integer> {
+public interface IGoalsRepository extends JpaRepository<Objectif, Integer> {
 
     Optional<Objectif> findByName(String nom);
 

@@ -7,12 +7,10 @@ import be.helmo.api.infrastructure.model.Role;
 import be.helmo.api.infrastructure.model.User;
 import be.helmo.api.infrastructure.repository.IRoleRepository;
 import be.helmo.api.infrastructure.repository.IUserRepository;
-import be.helmo.api.security.AuthenticationResponse;
 import be.helmo.api.tools.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,10 +43,6 @@ public class UserService {
 
     public Optional<User> getUser(Integer id) {
         return userRepository.findById(id);
-    }
-
-    public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
     }
 
     public List<User> getUsers() {

@@ -24,7 +24,7 @@ public class IQuizzTryRepositoryTests {
     @Autowired
     private IQuizzRepository quizzRepository;
     @Autowired
-    private IUserRepository utilisateurRepository;
+    private IUserRepository userRepository;
     @Autowired
     private IRoleRepository roleRepository;
 
@@ -37,7 +37,7 @@ public class IQuizzTryRepositoryTests {
         QuizzTry quizzTry = new QuizzTry(quizz, user, 50);
 
         roleRepository.save(role);
-        utilisateurRepository.save(user);
+        userRepository.save(user);
         quizzRepository.save(quizz);
         repository.save(quizzTry);
 

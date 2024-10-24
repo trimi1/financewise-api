@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ActiveProfiles("test")
 public class IUserRepositoryTests {
     @Autowired
-    private IUserRepository repository;
+    private IUserRepository userRepository;
     @Autowired
     private IRoleRepository roleRepository;
 
@@ -27,11 +27,11 @@ public class IUserRepositoryTests {
         Role role = new Role("Boss");
         User user = new User("Juve", "Matteo", "m.juve@student.helmo.be", "P4$$word", "a1b2c3", role);
         roleRepository.save(role);
-        repository.save(user);
-        Optional<User> founded = repository.findByEmail("m.juve@student.helmo.be");
+        userRepository.save(user);
+        Optional<User> founded = userRepository.findByEmail("m.juve@student.helmo.be");
         Optional<Role> foundedRole = roleRepository.findByRole("Boss");
         assertTrue(founded.isPresent());
-        assertEquals(1, repository.count());
+        assertEquals(1, userRepository.count());
 
         assertEquals("Juve", founded.get().getLastName());
         assertEquals("Matteo", founded.get().getFirstName());

@@ -29,16 +29,16 @@ public class DepenseController {
         return ResponseEntity.ok(depense.get());
     }
 
-    @GetMapping("/financewise/depenses/users/{email}")
-    public ResponseEntity<List<DepenseDTO>> getUserDepenses(@PathVariable String email, @RequestParam(required = false) String fields) {
-        List<Depense> depenses = depenseService.getDepensesByUser(email);
+    @GetMapping("/financewise/depenses/users/{id}")
+    public ResponseEntity<List<DepenseDTO>> getUserDepenses(@PathVariable int id, @RequestParam(required = false) String fields) {
+        List<Depense> depenses = depenseService.getDepensesByUserId(id);
         List<DepenseDTO> depenseDTO = DepenseMapper.toDTOList(depenses);
         return ResponseEntity.ok(depenseDTO);
     }
 
-    @GetMapping("/financewise/depenses/users/{email}/categorie/{cat_name}")
-    public ResponseEntity<List<DepenseDTO>> getUserDepensesByCategory(@PathVariable String email, @PathVariable String cat_name, @RequestParam(required = false) String fields) {
-        List<Depense> depenses = depenseService.getDepensesByCategorie(email, cat_name);
+    @GetMapping("/financewise/depenses/users/{id}/categorie/{cat_name}")
+    public ResponseEntity<List<DepenseDTO>> getUserDepensesByCategory(@PathVariable int id, @PathVariable String cat_name, @RequestParam(required = false) String fields) {
+        List<Depense> depenses = depenseService.getDepensesByCategorie(id, cat_name);
         List<DepenseDTO> depenseDTO = DepenseMapper.toDTOList(depenses);
         return ResponseEntity.ok(depenseDTO);
     }

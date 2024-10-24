@@ -22,9 +22,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/financewise/users/{email}")
-    public ResponseEntity<Map<String, Object>> getUserByEmail(@PathVariable String email, @RequestParam(required = false) String fields) {
-        Optional<User> handleUser = userService.getUserByEmail(email);
+    @GetMapping("/financewise/users/{id}")
+    public ResponseEntity<Map<String, Object>> getUserByEmail(@PathVariable int id, @RequestParam(required = false) String fields) {
+        Optional<User> handleUser = userService.getUser(id);
         if(handleUser.isEmpty()) {
             return ResponseEntity.notFound().build();
         }

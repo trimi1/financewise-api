@@ -1,5 +1,6 @@
 package be.helmo.api.controller;
 
+import be.helmo.api.dto.AuthenticationResponseDTO;
 import be.helmo.api.dto.LoginUserDto;
 import be.helmo.api.dto.RegisterUserDto;
 import be.helmo.api.security.AuthenticationResponse;
@@ -20,12 +21,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterUserDto request) {
+    public ResponseEntity<AuthenticationResponseDTO> register(@RequestBody RegisterUserDto request) {
         return ResponseEntity.ok(userService.register(request));
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody LoginUserDto request) {
+    public ResponseEntity<AuthenticationResponseDTO> authenticate(@RequestBody LoginUserDto request) {
         return ResponseEntity.ok(userService.authenticate(request));
     }
 }

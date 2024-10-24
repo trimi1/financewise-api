@@ -1,5 +1,6 @@
 package be.helmo.api.service;
 
+import be.helmo.api.dto.AuthenticationResponseDTO;
 import be.helmo.api.dto.LoginUserDto;
 import be.helmo.api.dto.RegisterUserDto;
 import be.helmo.api.infrastructure.model.Role;
@@ -62,22 +63,28 @@ public class UserService {
         return roleRepository.findByRole(role).get();
     }
 
-    public AuthenticationResponse register(RegisterUserDto request) {
+    private int getUserIdByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.map(User::getId).orElse(-1);
+    }
+
+    public AuthenticationResponseDTO register(RegisterUserDto request) {
         String password = passwordEncoder.encode(request.password());
         List<String> codes = userRepository.findAllCodes();
         String code = this.utils.generateCode(codes);
         Role role = checkRole("User");
         User user = new User(request.lastName(), request.firstName(), request.email(), password, code, role);
         userRepository.save(user);
+        int idUser = getUserIdByEmail(request.email());
         String tokenResponse = jwtService.generateToken(user);
-        return new AuthenticationResponse(tokenResponse);
+        return new AuthenticationResponseDTO(tokenResponse, 0L, idUser);
     }
 
-    public AuthenticationResponse authenticate(LoginUserDto request) {
+    public AuthenticationResponseDTO authenticate(LoginUserDto request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
-        UserDetails user = userRepository.findByEmail(request.email()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = userRepository.findByEmail(request.email()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         String tokenResponse = jwtService.generateToken(user);
-        return new AuthenticationResponse(tokenResponse);
+        return new AuthenticationResponseDTO(tokenResponse, 0L, user.getId());
     }
 
     public void updateUser(Integer id, User user) {

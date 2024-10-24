@@ -49,4 +49,10 @@ public class GoalsService {
             iGoalsRepository.save(objectif);
         });
     }
+
+    public void updateGoals(int idUser, List<GoalsDTO> goals) {
+    }
+
+    public void deleteGoals(int idUser, List<GoalsDTO> goals) {
+    }
 }

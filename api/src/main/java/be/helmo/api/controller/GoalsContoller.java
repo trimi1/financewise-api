@@ -38,14 +38,23 @@ public class GoalsContoller {
         goalService.addGoals(idUser, goals);
     }
 
+    /**
+     * Update goals from a user
+     * @param idUser user id
+     * @param goals list of goals
+     */
     @PutMapping("/users/{idUser}")
     public void updateGoals(@PathVariable int idUser, @RequestBody List<GoalsDTO> goals) {
         goalService.updateGoals(idUser, goals);
     }
 
+    /**
+     * Delete goals from a user
+     * @param idUser user id
+     * @param goals list of goals
+     */
     @DeleteMapping("/users/{idUser}")
     public void deleteGoals(@PathVariable int idUser, @RequestBody List<GoalsDTO> goals) {
         goalService.deleteGoals(idUser, goals);
     }
-
 }

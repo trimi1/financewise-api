@@ -64,4 +64,8 @@ public class Categorie {
     public void setUtilisateur(User user) {
         this.user = user;
     }
+
+    public int getId() {
+        return idCategorie;
+    }
 }

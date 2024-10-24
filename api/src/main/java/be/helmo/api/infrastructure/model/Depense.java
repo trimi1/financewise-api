@@ -104,4 +104,8 @@ public class Depense {
     public void setUtilisateur(User user) {
         this.user = user;
     }
+
+    public int getId() {
+        return idDepense;
+    }
 }

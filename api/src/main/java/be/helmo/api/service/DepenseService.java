@@ -13,16 +13,6 @@ public class DepenseService {
 
     @Autowired
     private IDepenseRepository depenseRepository;
-    @Autowired
-    private IDeviseRepository deviseRepository;
-    @Autowired
-    private IRoleRepository roleRepository;
-    @Autowired
-    private IUserRepository utilisateurRepository;
-    @Autowired
-    private ICategorieRepository categorieRepository;
-    @Autowired
-    private IGoalsRepository objectifRepository;
 
     public DepenseService() {
     }
@@ -50,10 +40,6 @@ public class DepenseService {
 
     public void deleteDepense(int id) {
         depenseRepository.deleteById(id);
-    }
-
-    public List<Depense> getDepensesByCategorie(int id, String name) {
-        return depenseRepository.findByUser_IdAndCategorie_Name(id, name);
     }
 
     public List<Depense> getDepensesByUserId(int id) {

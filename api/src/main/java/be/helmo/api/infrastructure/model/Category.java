@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "UE25_26_CATEGORIE")
-public class Categorie {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class Categorie {
     @JoinColumn(name = "idUser", nullable = false, referencedColumnName = "idUser")
     private User user;
 
-    protected Categorie() {
+    protected Category() {
     }
 
-    public Categorie(String name, double montantMax, Devise devise, User user) {
+    public Category(String name, double montantMax, Devise devise, User user) {
         this.name = name;
         this.montantMax = montantMax;
         this.devise = devise;

@@ -42,7 +42,7 @@ public class User implements UserDetails {
     List<Objectif> objectifs;
 
     @OneToMany(mappedBy = "user")
-    List<Categorie> categories;
+    List<Category> categories;
 
     @OneToMany(mappedBy = "user")
     List<Information> informations;
@@ -113,11 +113,11 @@ public class User implements UserDetails {
         this.objectifs = objectifs;
     }
 
-    public List<Categorie> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Categorie> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 

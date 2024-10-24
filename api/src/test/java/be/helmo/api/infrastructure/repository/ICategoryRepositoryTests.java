@@ -2,7 +2,7 @@ package be.helmo.api.infrastructure.repository;
 
 import be.helmo.api.app.ApiApplication;
 
-import be.helmo.api.infrastructure.model.Categorie;
+import be.helmo.api.infrastructure.model.Category;
 import be.helmo.api.infrastructure.model.Devise;
 import be.helmo.api.infrastructure.model.Role;
 import be.helmo.api.infrastructure.model.User;
@@ -19,9 +19,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ApiApplication.class)
 @ActiveProfiles("test")
-public class ICategorieRepositoryTests {
+public class ICategoryRepositoryTests {
     @Autowired
-    private ICategorieRepository repository;
+    private ICategoryRepository repository;
     @Autowired
     private IDeviseRepository deviseRepository;
     @Autowired
@@ -35,14 +35,14 @@ public class ICategorieRepositoryTests {
         Devise devise = new Devise("Euro");
         Role role = new Role("Admin");
         User user = new User("Manca", "Mirko", "m.manca@student.helmo.be", "P4$$word", "m4loje", role);
-        Categorie categorie = new Categorie("Voiture", 2000, devise, user);
+        Category categorie = new Category("Voiture", 2000, devise, user);
 
         deviseRepository.save(devise);
         roleRepository.save(role);
         userRepository.save(user);
         repository.save(categorie);
 
-        Optional<Categorie> founded = repository.findByName("Voiture");
+        Optional<Category> founded = repository.findByName("Voiture");
         assertTrue(founded.isPresent());
 
         assertEquals("Euro", founded.get().getDevise().getDevise());

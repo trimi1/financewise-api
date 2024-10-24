@@ -28,7 +28,7 @@ public class IDepenseRepositoryTests {
     @Autowired
     IUserRepository userRepository;
     @Autowired
-    ICategorieRepository categorieRepository;
+    ICategoryRepository categorieRepository;
     @Autowired
     IGoalsRepository goalsRepository;
 
@@ -48,7 +48,7 @@ public class IDepenseRepositoryTests {
         Devise devise = new Devise("Dollars");
         Role role = new Role("Co-Worker");
         User user = new User("Lemaire", "Nicolas", "n.lemaire@student.helmo.be", "P4$$word", "m4loje", role);
-        Categorie categorie = new Categorie("Maison", 2000, devise, user);
+        Category categorie = new Category("Maison", 2000, devise, user);
         Objectif objectif = new Objectif("Ferrari", 215713, LocalDate.of(2025, 1, 1).atStartOfDay(), devise, "Met 1 euro dans un pot tous les jours.", user);
         Depense depense = new Depense("Ferrari I", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), categorie, objectif, user);
 
@@ -82,8 +82,8 @@ public class IDepenseRepositoryTests {
         Devise devise = new Devise("Dollars");
         Role role = new Role("Co-Worker");
         User user = new User("Lemaire", "Nicolas", "n.lemaire@student.helmo.be", "P4$$word", "m4loje", role);
-        Categorie categorie = new Categorie("Maison", 2000, devise, user);
-        Categorie snCategorie = new Categorie("Voiture", 1500, devise, user);
+        Category categorie = new Category("Maison", 2000, devise, user);
+        Category snCategorie = new Category("Voiture", 1500, devise, user);
         Objectif objectif = new Objectif("Ferrari", 215713, LocalDate.of(2025, 1, 1).atStartOfDay(), devise, "Met 1 euro dans un pot tous les jours.", user);
         Depense depense = new Depense("Ferrari I", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), categorie, objectif, user);
         Depense depenseSn = new Depense("Ferrari II", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), snCategorie, objectif, user);
@@ -118,8 +118,6 @@ public class IDepenseRepositoryTests {
 
         List<Depense> depenses = depenseRepository.findByCategorie_Name("Maison");
         assertEquals(2, depenses.size());
-        List<Depense> depenseList = depenseRepository.findByUser_IdAndCategorie_Name(user.getId(), "Maison");
-        assertEquals(2, depenseList.size());
     }
 
     @Test
@@ -129,7 +127,7 @@ public class IDepenseRepositoryTests {
         Role role = new Role("Co-Worker");
         User user = new User("Lemaire", "Nicolas", "n.lemaire@student.helmo.be", "P4$$word", "m4loje", role);
         User userSn = new User("Boucher", "Louis", "l.boucher@student.helmo.be", "P4$$word", "m4lojx", role);
-        Categorie categorie = new Categorie("Maison", 2000, devise, user);
+        Category categorie = new Category("Maison", 2000, devise, user);
         Objectif objectif = new Objectif("Ferrari", 215713, LocalDate.of(2025, 1, 1).atStartOfDay(), devise, "Met 1 euro dans un pot tous les jours.", user);
         Depense depense = new Depense("Ferrari I", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), categorie, objectif, user);
         Depense depenseSn = new Depense("Ferrari II", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), categorie, objectif, userSn);
@@ -154,7 +152,5 @@ public class IDepenseRepositoryTests {
 
         List<Depense> depenses = depenseRepository.findByUser_Id(user.getId());
         assertEquals(2, depenses.size());
-        List<Depense> depensesUser = depenseRepository.findByUser_IdAndCategorie_Name(user.getId(), "Maison");
-        assertEquals(2, depensesUser.size());
     }
 }

@@ -35,11 +35,4 @@ public class DepenseController {
         List<DepenseDTO> depenseDTO = DepenseMapper.toDTOList(depenses);
         return ResponseEntity.ok(depenseDTO);
     }
-
-    @GetMapping("/financewise/depenses/users/{id}/categorie/{cat_name}")
-    public ResponseEntity<List<DepenseDTO>> getUserDepensesByCategory(@PathVariable int id, @PathVariable String cat_name, @RequestParam(required = false) String fields) {
-        List<Depense> depenses = depenseService.getDepensesByCategorie(id, cat_name);
-        List<DepenseDTO> depenseDTO = DepenseMapper.toDTOList(depenses);
-        return ResponseEntity.ok(depenseDTO);
-    }
 }

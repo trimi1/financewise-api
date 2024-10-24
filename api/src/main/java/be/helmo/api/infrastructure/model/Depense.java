@@ -26,7 +26,7 @@ public class Depense {
 
     @ManyToOne
     @JoinColumn(name = "idCategorie", referencedColumnName = "idCategorie")
-    private Categorie categorie;
+    private Category categorie;
 
     @ManyToOne
     @JoinColumn(name = "idObjectif", referencedColumnName = "idObjectif")
@@ -39,7 +39,7 @@ public class Depense {
     protected Depense() {
     }
 
-    public Depense(String name, double montant, Devise devise, LocalDateTime date, Categorie categorie, Objectif objectif, User user) {
+    public Depense(String name, double montant, Devise devise, LocalDateTime date, Category categorie, Objectif objectif, User user) {
         this.name = name;
         this.montant = montant;
         this.devise = devise;
@@ -81,11 +81,11 @@ public class Depense {
         this.date = date;
     }
 
-    public Categorie getCategorie() {
+    public Category getCategorie() {
         return categorie;
     }
 
-    public void setCategorie(Categorie categorie) {
+    public void setCategorie(Category categorie) {
         this.categorie = categorie;
     }
 

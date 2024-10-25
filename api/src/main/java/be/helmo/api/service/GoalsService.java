@@ -36,7 +36,7 @@ public class GoalsService {
     }
 
 
-    public void addGoals(int idUser, List<GoalsDTO> goals) {
+    private void addGoals(int idUser, List<GoalsDTO> goals) {
         Optional<User> handleUser = userRepository.findById(idUser);
         if (handleUser.isEmpty()) {
             throw new UsernameNotFoundException("User not found");

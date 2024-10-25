@@ -46,7 +46,7 @@ public class ICategoryRepositoryTests {
         assertTrue(founded.isPresent());
 
         assertEquals("Euro", founded.get().getDevise().getDevise());
-        assertEquals("Manca", founded.get().getUtilisateur().getLastName());
+        assertEquals("Manca", founded.get().getUser().getLastName());
         assertEquals("Voiture", founded.get().getName());
     }
 }

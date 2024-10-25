@@ -6,10 +6,7 @@ import be.helmo.api.infrastructure.model.Category;
 import be.helmo.api.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,11 +20,35 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/financewise/category/users/{id}")
-    public ResponseEntity<List<CategoryDTO>> getUserCategories(@PathVariable int id, @RequestParam(required = false) String fields) {
+    /**
+     * Get categories by user idCategory
+     * @param id user idCategory
+     * @return the list of categories from a user
+     */
+    @GetMapping("/financewise/categories/users/{id}")
+    public ResponseEntity<List<CategoryDTO>> getUserCategories(@PathVariable int id) {
         List<Category> categories = categoryService.getAllUsersCategories(id);
         List<CategoryDTO> categorieDTOS = CategoryMapper.toDTOList(categories);
         return ResponseEntity.ok(categorieDTOS);
     }
 
+    /**
+     * Update categories from a user
+     * @param idUser user idCategory
+     * @param categories list of categories
+     */
+    @PutMapping("/financewise/categories/users/{idUser}")
+    public void updateCategories(@PathVariable int idUser, @RequestBody List<CategoryDTO> categories) {
+        categoryService.updateCategories(idUser, categories);
+    }
+
+    /**
+     * Delete categories from a user
+     * @param idUser user idCategory
+     * @param categories list of categories
+     */
+    @DeleteMapping("/financewise/categories/users/{idUser}")
+    public void deleteCategories(@PathVariable int idUser, @RequestBody List<CategoryDTO> categories) {
+        categoryService.deleteCategories(idUser, categories);
+    }
 }

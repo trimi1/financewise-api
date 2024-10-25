@@ -18,7 +18,7 @@ import java.util.Optional;
 public class CategoryService {
 
     @Autowired
-    private ICategoryRepository categorieRepository;
+    private ICategoryRepository categoryRepository;
 
     @Autowired
     private IUserRepository userRepository;
@@ -29,41 +29,60 @@ public class CategoryService {
     public CategoryService() {
     }
 
-    public Optional<Category> getCategorieById(int id) {
-        return categorieRepository.findById(id);
-    }
-
-    public List<Category> getAllUsersCategories(int id) {
-        return categorieRepository.findByUser_Id(id);
+    public List<Category> getAllUsersCategories(int idUser) {
+        return categoryRepository.findByUser_Id(idUser);
     }
 
     public void addCategories(int idUser, List<CategoryDTO> categories){
-
-        User user = GetUser(idUser);
+        User user = getUser(idUser);
         categories.forEach(category -> {
-            Optional<Devise> handleDevise = deviseRepository.findByDevise(category.devise());
-            //TODO: si devise existante dans la db, alors l'ajouter à la catégorie, sinon renvoyer une erreur
-            //Category categorie = new Category(category.name(), category.montantMax(), devise, user);
-            //categorieRepository.save(categorie);
+            if (deviseRepository.findByDevise(category.devise()).isEmpty()){//TODO: si devise existante dans la db, alors l'ajouter à la catégorie, sinon renvoyer une erreur (faire pareil pour les autres classes)
+                throw new RuntimeException();//TODO: exception personnalisé? car la c'est pas adapté. --> Créer un package pour y mettre les exceptions si oui.
+            } else {
+                Devise devise = deviseRepository.findByDevise(category.devise()).get();
+                Category categorie = new Category(category.name(), category.montantMax(), devise, user);
+                categoryRepository.save(categorie);
+            }
         });
     }
 
     public void updateCategories(int idUser, List<CategoryDTO> categories) {
-        GetUser(idUser);
-        //TODO: update categories
+        List<CategoryDTO> toCreate = categories.stream().filter(category -> category.idCategory() < 0).toList();
+        List<CategoryDTO> toUpdate = categories.stream().filter(category -> category.idCategory() > 0).toList();
+        addCategories(idUser, toCreate);
+        toUpdate.forEach(category -> {
+            Optional<Category> handleCategory = categoryRepository.findById(category.idCategory());
+            if (handleCategory.isPresent()) {
+                Category categorie = handleCategory.get();
+                if (categorie.getUser().getId() == idUser) {
+                    categorie.setName(category.name());
+                    categorie.setMontantMax(category.montantMax());
+                    categorie.setDevise(deviseRepository.findByDevise(category.devise()).orElseGet(() -> deviseRepository.save(new Devise(category.devise()))));
+                    categoryRepository.save(categorie);
+                }
+            }
+        });
     }
 
     public void deleteCategories(int idUser, List<CategoryDTO> categories) {
-        GetUser(idUser);
-        //TODO: delete categories
+        User user = getUser(idUser);
+        categories.forEach(category -> {
+            Optional<Category> handleCategory = categoryRepository.findById(category.idCategory());
+            if (handleCategory.isPresent()) {
+                Category categorie = handleCategory.get();
+                if (categorie.getUser().getId() == user.getId()) {
+                    categoryRepository.delete(categorie);
+                }
+            }
+        });
     }
 
     /**
-     * Get the user by its id
-     * @param idUser the id of the user
+     * Get the user by its idCategory
+     * @param idUser the idCategory of the user
      * @return the user
      */
-    private User GetUser(int idUser) {
+    private User getUser(int idUser) {
         Optional<User> handleUser = userRepository.findById(idUser);
         if (handleUser.isEmpty()) {
             throw new UsernameNotFoundException("User not found");

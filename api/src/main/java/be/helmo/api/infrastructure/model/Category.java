@@ -57,7 +57,7 @@ public class Category {
         this.devise = devise;
     }
 
-    public User getUtilisateur() {
+    public User getUser() {
         return user;
     }
 

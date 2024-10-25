@@ -54,10 +54,36 @@ public class GoalsService {
         List<GoalsDTO> toCreate = goals.stream().filter(goal -> goal.id() <= 0).toList();
         List<GoalsDTO> toUpdate = goals.stream().filter(goal -> goal.id() > 0).toList();
         addGoals(idUser, toCreate);
-
-
+        toUpdate.forEach(goal -> {
+            Optional<Objectif> handleGoal = iGoalsRepository.findById(goal.id());
+            if (handleGoal.isPresent()) {
+                Objectif objectif = handleGoal.get();
+                if (objectif.getUser().getId() == idUser) {
+                    objectif.setMontant(goal.montant());
+                    objectif.setDeadline(goal.deadline());
+                    objectif.setDevise(deviseRepository.findByDevise(goal.devise()).orElseGet(() -> deviseRepository.save(new Devise(goal.devise()))));
+                    objectif.setRecommendation(goal.recommendation());
+                    objectif.setName(goal.name());
+                    iGoalsRepository.save(objectif);
+                }
+            }
+        });
     }
 
     public void deleteGoals(int idUser, List<GoalsDTO> goals) {
+        Optional<User> handleUser = userRepository.findById(idUser);
+        if (handleUser.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        User user = handleUser.get();
+        goals.forEach(goal -> {
+            Optional<Objectif> handleGoal = iGoalsRepository.findById(goal.id());
+            if (handleGoal.isPresent()) {
+                Objectif objectif = handleGoal.get();
+                if (objectif.getUser().getId() == user.getId()) {
+                    iGoalsRepository.delete(objectif);
+                }
+            }
+        });
     }
 }

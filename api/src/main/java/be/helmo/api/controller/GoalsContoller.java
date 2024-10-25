@@ -29,16 +29,6 @@ public class GoalsContoller {
     }
 
     /**
-     * Add goals to a user
-     * @param idUser user id
-     * @param goals list of goals
-     */
-    @PostMapping("/financewise/goals/users/{idUser}")
-    public void addGoals(@PathVariable int idUser, @RequestBody List<GoalsDTO> goals) {
-        goalService.addGoals(idUser, goals);
-    }
-
-    /**
      * Update goals from a user
      * @param idUser user id
      * @param goals list of goals

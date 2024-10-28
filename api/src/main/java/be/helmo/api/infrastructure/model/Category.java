@@ -13,7 +13,8 @@ public class Category {
     @Column(length = 50, nullable = false)
     private String name;
 
-    private double montantMax;
+    @Column(nullable = true)
+    private Double montantMax;
 
     @ManyToOne
     @JoinColumn(name = "idDevise", nullable = false, referencedColumnName = "idDevise")
@@ -26,7 +27,7 @@ public class Category {
     protected Category() {
     }
 
-    public Category(String name, double montantMax, Devise devise, User user) {
+    public Category(String name, Double montantMax, Devise devise, User user) {
         this.name = name;
         this.montantMax = montantMax;
         this.devise = devise;
@@ -41,7 +42,7 @@ public class Category {
         this.name = categorie;
     }
 
-    public double getMontantMax() {
+    public Double getMontantMax() {
         return montantMax;
     }
 

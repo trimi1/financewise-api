@@ -38,7 +38,7 @@ public class IUserRepositoryTests {
         assertEquals("P4$$word", founded.get().getPassword());
         assertEquals("a1b2c3", founded.get().getCode());
         assertEquals("m.juve@student.helmo.be", founded.get().getEmail());
-        assertEquals("Boss", founded.get().getRole().getRole());
+        assertEquals("Boss", founded.get().getRole().getNameRole());
     }
 
 }

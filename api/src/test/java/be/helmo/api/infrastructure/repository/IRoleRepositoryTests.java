@@ -4,7 +4,6 @@ package be.helmo.api.infrastructure.repository;
 import be.helmo.api.app.ApiApplication;
 
 import be.helmo.api.infrastructure.model.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +30,7 @@ public class IRoleRepositoryTests {
         roleRepository.save(role);
         Optional<Role> foundedRole = roleRepository.findByRole("Pro");
         assertTrue(foundedRole.isPresent());
-        assertEquals("Pro", foundedRole.get().getRole());
+        assertEquals("Pro", foundedRole.get().getNameRole());
         roleRepository.delete(foundedRole.get());
         assertEquals(0, roleRepository.count());
     }

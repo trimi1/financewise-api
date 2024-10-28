@@ -35,7 +35,7 @@ public class ICategoryRepositoryTests {
         Devise devise = new Devise("Euro");
         Role role = new Role("Admin");
         User user = new User("Manca", "Mirko", "m.manca@student.helmo.be", "P4$$word", "m4loje", role);
-        Category categorie = new Category("Voiture", 2000, devise, user);
+        Category categorie = new Category("Voiture", 2000.0, devise, user);
 
         deviseRepository.save(devise);
         roleRepository.save(role);

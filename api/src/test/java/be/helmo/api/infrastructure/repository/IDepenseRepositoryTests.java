@@ -48,7 +48,7 @@ public class IDepenseRepositoryTests {
         Devise devise = new Devise("Dollars");
         Role role = new Role("Co-Worker");
         User user = new User("Lemaire", "Nicolas", "n.lemaire@student.helmo.be", "P4$$word", "m4loje", role);
-        Category categorie = new Category("Maison", 2000, devise, user);
+        Category categorie = new Category("Maison", 2000.0, devise, user);
         Objectif objectif = new Objectif("Ferrari", 215713, LocalDate.of(2025, 1, 1).atStartOfDay(), devise, "Met 1 euro dans un pot tous les jours.", user);
         Depense depense = new Depense("Ferrari I", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), categorie, objectif, user);
 
@@ -82,8 +82,8 @@ public class IDepenseRepositoryTests {
         Devise devise = new Devise("Dollars");
         Role role = new Role("Co-Worker");
         User user = new User("Lemaire", "Nicolas", "n.lemaire@student.helmo.be", "P4$$word", "m4loje", role);
-        Category categorie = new Category("Maison", 2000, devise, user);
-        Category snCategorie = new Category("Voiture", 1500, devise, user);
+        Category categorie = new Category("Maison", 2000.0, devise, user);
+        Category snCategorie = new Category("Voiture", 1500.0, devise, user);
         Objectif objectif = new Objectif("Ferrari", 215713, LocalDate.of(2025, 1, 1).atStartOfDay(), devise, "Met 1 euro dans un pot tous les jours.", user);
         Depense depense = new Depense("Ferrari I", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), categorie, objectif, user);
         Depense depenseSn = new Depense("Ferrari II", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), snCategorie, objectif, user);
@@ -127,7 +127,7 @@ public class IDepenseRepositoryTests {
         Role role = new Role("Co-Worker");
         User user = new User("Lemaire", "Nicolas", "n.lemaire@student.helmo.be", "P4$$word", "m4loje", role);
         User userSn = new User("Boucher", "Louis", "l.boucher@student.helmo.be", "P4$$word", "m4lojx", role);
-        Category categorie = new Category("Maison", 2000, devise, user);
+        Category categorie = new Category("Maison", 2000.0, devise, user);
         Objectif objectif = new Objectif("Ferrari", 215713, LocalDate.of(2025, 1, 1).atStartOfDay(), devise, "Met 1 euro dans un pot tous les jours.", user);
         Depense depense = new Depense("Ferrari I", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), categorie, objectif, user);
         Depense depenseSn = new Depense("Ferrari II", 1000, devise, LocalDate.of(2024, 11, 13).atStartOfDay(), categorie, objectif, userSn);

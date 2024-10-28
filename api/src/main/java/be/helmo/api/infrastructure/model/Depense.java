@@ -108,4 +108,7 @@ public class Depense {
     public int getId() {
         return idDepense;
     }
+    public User getUser() {
+        return user;
+    }
 }

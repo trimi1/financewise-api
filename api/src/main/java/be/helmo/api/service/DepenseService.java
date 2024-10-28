@@ -38,10 +38,11 @@ public class DepenseService {
         }
         User user = handleUser.get();
         for(DepenseDTO depenseDTO : depenses) {
+            //TODO : handle en cas de null
             Optional<Devise> handleDevise = deviseRepository.findByDevise(depenseDTO.devise());
             Optional<Category> handleCategory = categoryRepository.findById(depenseDTO.categorie().idCategory());
             Optional<Objectif> handleObjectif = goalsRepository.findById(depenseDTO.objectif().id());
-            Depense depense = new Depense(depenseDTO.name(), depenseDTO.montant(), handleDevise.get(), depenseDTO.date(), handleCategory.get(), handleObjectif.get(), user);
+            Depense depense = new Depense(depenseDTO.name(), depenseDTO.montant(), handleDevise.get(), depenseDTO.date(), handleCategory.orElse(null), handleObjectif.orElse(null), user);
             depenseRepository.save(depense);
         }
     }

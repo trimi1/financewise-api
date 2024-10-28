@@ -25,11 +25,11 @@ public class Depense {
     private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "idCategorie", referencedColumnName = "idCategorie")
+    @JoinColumn(name = "idCategorie", referencedColumnName = "idCategorie", nullable = true)
     private Category categorie;
 
     @ManyToOne
-    @JoinColumn(name = "idObjectif", referencedColumnName = "idObjectif")
+    @JoinColumn(name = "idObjectif", referencedColumnName = "idObjectif", nullable = true)
     private Objectif objectif;
 
     @ManyToOne

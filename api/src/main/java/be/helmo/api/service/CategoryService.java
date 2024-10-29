@@ -36,8 +36,8 @@ public class CategoryService {
     public void addCategories(int idUser, List<CategoryDTO> categories){
         User user = getUser(idUser);
         categories.forEach(category -> {
-            if (deviseRepository.findByDevise(category.devise()).isEmpty()){//TODO: si devise existante dans la db, alors l'ajouter à la catégorie, sinon renvoyer une erreur (faire pareil pour les autres classes)
-                throw new RuntimeException();//TODO: exception personnalisé? car la c'est pas adapté. --> Créer un package pour y mettre les exceptions si oui.
+            if (deviseRepository.findByDevise(category.devise()).isEmpty()){
+                throw new RuntimeException();//TODO: a readapté
             } else {
                 Devise devise = deviseRepository.findByDevise(category.devise()).get();
                 Category categorie = new Category(category.name(), category.montantMax(), devise, user);

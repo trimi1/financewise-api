@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,18 @@ public class DepenseService {
 
     public Optional<Depense> getDepenseById(int id) {
         return depenseRepository.findById(id);
+    }
+
+    public List<Depense> getDepensesByUserIdAndByCategory(int userId, String categoryFields) {//todo: vaudrait mieux géré en cas de pépin (exception)
+        List<Depense> depenses = new ArrayList<>();
+
+        String[] categoriesArray = categoryFields.split("&");
+        for (String category : categoriesArray) {
+            List<Depense> depensesByCategory = depenseRepository.findByUser_IdAndCategorie_Name(userId, category);
+            depenses.addAll(depensesByCategory);
+        }
+
+        return depenses;
     }
 
     private User getUserById(Integer id) throws UserNotFoundException {

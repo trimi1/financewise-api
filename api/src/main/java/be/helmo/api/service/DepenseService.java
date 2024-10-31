@@ -34,16 +34,20 @@ public class DepenseService {
         return depenseRepository.findById(id);
     }
 
-    public List<Depense> getDepensesByUserIdAndByCategory(int userId, String categoryFields) {//todo: vaudrait mieux géré en cas de pépin (exception)
-        List<Depense> depenses = new ArrayList<>();
-
-        String[] categoriesArray = categoryFields.split("&");
+    public List<Depense> getDepensesByUserIdOrFullNameAndByCategory(int userId, String lastName, String firstName, String categoryFields, boolean all) throws UserNotFoundException {//todo: vaudrait mieux géré en cas de pépin (exception)
+        List<Depense> expenses = new ArrayList<>();
+        String[] categoriesArray = categoryFields.split(",");
         for (String category : categoriesArray) {
-            List<Depense> depensesByCategory = depenseRepository.findByUser_IdAndCategorie_Name(userId, category);
-            depenses.addAll(depensesByCategory);
+            if(lastName != null && firstName != null) {
+                userId = userRepository.findByLastNameAndFirstName(lastName, firstName).orElseThrow(() -> new UserNotFoundException("User not found")).getId();
+                expenses.addAll(depenseRepository.findByUser_IdAndCategorie_NameAndObjectifNotNull(userId, category));
+            } else if(all) {
+                expenses.addAll(depenseRepository.findAllByCategorie_NameAndObjectifNotNull(category));
+            } else {
+                expenses.addAll(depenseRepository.findByUser_IdAndCategorie_NameAndObjectifNotNull(userId, category));
+            }
         }
-
-        return depenses;
+        return expenses;
     }
 
     private User getUserById(Integer id) throws UserNotFoundException {

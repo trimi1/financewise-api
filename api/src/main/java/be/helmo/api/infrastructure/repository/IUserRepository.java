@@ -11,7 +11,10 @@ import java.util.Optional;
 
 @Repository
 public interface IUserRepository extends JpaRepository<User, Integer> {
+
     Optional<User> findByEmail(String email);
+
+    Optional<User> findByLastNameAndFirstName(String lastName, String firstName);
 
     @Query(value = "SELECT code FROM ue25_26_user", nativeQuery = true)
     List<String> findAllCodes();

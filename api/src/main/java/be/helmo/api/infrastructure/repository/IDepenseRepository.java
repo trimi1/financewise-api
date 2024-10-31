@@ -14,8 +14,13 @@ import java.util.Optional;
 public interface IDepenseRepository extends JpaRepository<Depense, Integer> {
 
     Optional<Depense> findByName(String name);
+
     List<Depense> findByCategorie_Name(String name);
-    List<Depense> findByUser_IdAndCategorie_Name(int userId, String name);
+
+    List<Depense> findByUser_IdAndCategorie_NameAndObjectifNotNull(int userId, String name);
+
+    List<Depense> findAllByCategorie_NameAndObjectifNotNull(String name);
+
     List<Depense> findByUser_Id(int id);
 
     @Modifying

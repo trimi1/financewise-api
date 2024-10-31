@@ -29,9 +29,17 @@ public class DepenseController {
     }
 
     @GetMapping("/financewise/depenses/users/{id}")
-    public ResponseEntity<List<DepenseDTO>> getUserDepenses(@PathVariable int id, @RequestParam(required = false) String fields) {
-        if(fields != null) {
-            return ResponseEntity.ok(DepenseMapper.toDTOList(depenseService.getDepensesByUserIdAndByCategory(id, fields)));
+    public ResponseEntity<List<DepenseDTO>> getUserDepenses(@PathVariable int id,
+                                                            @RequestParam(required = false) String category,
+                                                            @RequestParam(required = false) String lastName,
+                                                            @RequestParam(required = false) String firstName,
+                                                            @RequestParam(defaultValue = "false") boolean all) {
+        if(category != null) {
+            try {
+                return ResponseEntity.ok(DepenseMapper.toDTOList(depenseService.getDepensesByUserIdOrFullNameAndByCategory(id, lastName, firstName, category, all)));
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            }
         } else {
             List<Depense> depenses = depenseService.getDepensesByUserId(id);
             List<DepenseDTO> depenseDTO = DepenseMapper.toDTOList(depenses);
